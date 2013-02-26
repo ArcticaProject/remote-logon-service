@@ -1,0 +1,27 @@
+Source: remote-login-service
+Section: misc
+Priority: extra
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Build-Depends: dbus-test-runner,
+               debhelper (>= 9),
+               intltool (>= 0.35.0), 
+               libdbus-1-dev,
+               libdbustest1-dev,
+               libgcrypt11-dev,
+               libglib2.0-dev (>= 2.29.19),
+               libjson-glib-dev,
+               libnm-glib-dev,
+               libsoup2.4-dev,
+               python3,
+Standards-Version: 3.9.3
+Homepage: http://launchpad.net/remote-login-service/
+Vcs-Bzr: https://code.launchpad.net/~ubuntu-desktop/remote-login-service/trunk
+
+Package: remote-login-service
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+Recommends: thin-client-config-agent
+Description: Service to track the remote servers to use
+ A small service to take the various sources for the remote
+ services and bring them into a simple DBus list.

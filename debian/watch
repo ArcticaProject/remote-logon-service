@@ -1,0 +1,2 @@
+version=3
+http://launchpad.net/remote-login-service/+download .*/remote-login-service-(.+)\.tar\.gz
