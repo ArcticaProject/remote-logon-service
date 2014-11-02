@@ -1,0 +1,19 @@
+--- a/src/uccs-server.c
++++ b/src/uccs-server.c
+@@ -20,6 +20,7 @@
+ #include "config.h"
+ #endif
+ 
++#include <glib.h>
+ #include <glib/gi18n.h>
+ 
+ #include <json-glib/json-glib.h>
+@@ -734,6 +735,8 @@
+ 		argv[1] = server->username;
+ 		argv[2] = NULL;
+ 
++		g_setenv("SERVER_ROOT", server->parent.uri, TRUE);
++
+ 		g_spawn_async_with_pipes(NULL, /* pwd */
+ 		                         (gchar **)argv,
+ 		                         NULL, /* env */

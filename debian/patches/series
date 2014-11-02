@@ -1,2 +1,4 @@
 01_clear_servers.patch
 glib-deprecated.diff
+02_server-name.patch
+03_x2go+rls.patch
