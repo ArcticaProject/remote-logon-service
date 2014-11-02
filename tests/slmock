@@ -1,0 +1,235 @@
+#!/usr/bin/python3
+#
+# Copyright (C) 2012 Canonical, Ltd.
+# Author: Matthew Fischer <matthew.fischer@canonical.com>
+
+import sys
+import json
+import random
+import argparse
+import string
+
+class ManagementServer():
+    def __init__(self, url, name):
+        self.RemoteDesktopServers = []
+        self.AdditionalManagementServers = []
+        self.URL = url
+        self.Name = name
+
+    def set_default(self, tsName):
+        if isinstance(tsName, str):
+            self.DefaultServer = tsName
+        else:
+            raise TypeError("set_default expects a string argument")
+
+    def add_terminal_server(self, server):
+        self.RemoteDesktopServers.append(server)
+
+    def add_additional_management_server(self, amserver):
+        if isinstance(amserver, AdditionalManagementServer):
+            self.AdditionalManagementServers.append(amserver)
+        else:
+            raise TypeError("add_additional_management_server expects a "\
+                "AdditionalManagementServer argument")
+
+    def toJson(self):
+        return json.dumps(self, default=convert_to_builtin_type)
+
+class AdditionalManagementServer():
+    def __init__(self, url, name):
+        self.URL = url
+        self.Name = name
+
+class TerminalServer():
+    def __init__(self, url, name, protocol, domainRequired = True, 
+        username = None, password = None):
+        self.URL = url
+        self.Name = name
+        self.Protocol = protocol
+        self.DomainRequired = domainRequired
+        self.Username = username
+        self.Password = password
+
+    def add_domain(self, domainName):
+        if isinstance(domainName, str):
+            self.WindowsDomain = domainName
+        else:
+            raise TypeError("add_domain expects a string argument")
+
+    def toJson(self):
+        return json.dumps(self, default=convert_to_builtin_type)
+
+def convert_to_builtin_type(obj):
+    d = { }
+    d.update(obj.__dict__)
+    return d
+
+def freerdp(email):
+    ms = ManagementServer("http://tc.canonical.com", "Landscape")
+    ts1 = TerminalServer("23.21.151.133", "FreeRDP US", "freerdp", False, 
+        "Administrator")
+    ts2 = TerminalServer("46.137.222.181", "FreeRDP Asia", "freerdp", False,
+        "Administrator")
+    ts3 = TerminalServer("46.137.189.194", "FreeRDP UK", "freerdp", False,
+        "Administrator")
+    ms.add_terminal_server(ts1)
+    ms.add_terminal_server(ts2)
+    ms.add_terminal_server(ts3)
+    ms.set_default(ts1.Name)
+    print(ms.toJson())
+
+def print_error(text):
+    print("{ \"Error\": \"%s\" }" % text)
+
+def error(email):
+    print_error("Server did not respond")
+
+def citrix(email):
+    ms = ManagementServer("http://tc.canonical.com", "Landscape")
+    ts1 = TerminalServer("107.21.17.35", "Citrix USA", "ICA", True, 
+        "useradmin1")
+    ts2 = TerminalServer("107.21.17.35", "Citrix 2", "ICA", True,
+        "useradmin2")
+    ts3 = TerminalServer("107.21.17.35", "Citrix 3", "ICA", True,
+        "useradmin3")
+    ts4 = TerminalServer("107.21.17.35", "Citrix 4", "ICA", True,
+        "useradmin4", "userpass")
+    ts1.add_domain("IP-0A00001E")
+    ts2.add_domain("IP-0A00001E")
+    ts3.add_domain("IP-0A00001E")
+    ts4.add_domain("IP-0A00001E")
+    ms.add_terminal_server(ts1)
+    ms.add_terminal_server(ts2)
+    ms.add_terminal_server(ts3)
+    ms.add_terminal_server(ts4)
+    print(ms.toJson())
+
+def vmware(email):
+    ms = ManagementServer("http://tc.canonical.com", "Landscape")
+    ts = TerminalServer("https://10.193.37.140", "VMWare-View Lexington", 
+        "vmware", True, "Administrator")
+    ts.add_domain("VMWARE")
+    ms.add_terminal_server(ts)
+    print(ms.toJson())
+
+def defaults(email):
+    ms = ManagementServer("http://tc.canonical.com", "Landscape")
+    ts1 = TerminalServer("https://10.10.10.10", "AAA", "vmware")
+    ts2 = TerminalServer("https://10.10.10.10", "ZZZ", "vmware")
+    ts3 = TerminalServer("https://10.10.10.10", "MMM-Default", "vmware", True)
+    ts1.add_domain("VMWARE")
+    ts2.add_domain("VMWARE")
+    ts3.add_domain("VMWARE")
+    ms.set_default(ts3.Name)
+    ms.add_terminal_server(ts1)
+    ms.add_terminal_server(ts2)
+    ms.add_terminal_server(ts3)
+    print(ms.toJson())
+
+# a choice of random problems in the json that the parser should catch
+def missing_fields(email):
+    val = random.randint(1,4)
+    ms = ManagementServer("http://tc.canonical.com", "Landscape")
+    ts3 = TerminalServer("https://10.10.10.10", "TS1-Default", "vmware", True)
+    ts3.add_domain("VMWARE")
+    ms.set_default(ts3.Name)
+
+    # no ts's
+    if val == 1:
+        print(ms.toJson())
+        return
+
+    # no protocol in TS
+    elif val == 2:
+        ts3.Protocol = None
+
+    # no url in TS
+    elif val == 3:
+        ts3.URL = None
+
+    # no name in TS
+    elif val == 4:
+        ts3.Name = None
+
+    ms.add_terminal_server(ts3)
+    print(ms.toJson())
+
+def big(email):
+    ms = ManagementServer("http://tc.canonical.com", "Landscape")
+
+    ts1 = TerminalServer("107.21.17.35", "XenServer", "ICA")
+    ts2 = TerminalServer("http://1.2.3.4", "Citrix2", "ICA", True, 
+        "fakeuser", "fakepassword")
+    ts3 = TerminalServer("10.21.17.35", "Accenture", "freerdp", True, 
+        "fakeuser")
+    ts4 = TerminalServer("https://4.5.6.7", "Accenture 2", "freerdp", False)
+    ts5 = TerminalServer("5.21.17.35", "VmWare Cloud", "vmware", False, 
+        "fakeuser", "fakepassword")
+    ts6 = TerminalServer("http://8.9.10.11", "Canonicloud", "vmware", True)
+
+    ts1.add_domain("ASIA")
+    ts2.add_domain("DOMAIN1")
+    ts3.add_domain("EUROPE")
+    ts4.add_domain("domain2")
+
+    ms.add_terminal_server(ts1)
+    ms.add_terminal_server(ts2)
+    ms.add_terminal_server(ts3)
+    ms.add_terminal_server(ts4)
+    ms.add_terminal_server(ts5)
+    ms.add_terminal_server(ts6)
+    ms.set_default(ts4.Name)
+
+    ams1 = AdditionalManagementServer("http://1.2.3.4", "AMS1")
+    ams2 = AdditionalManagementServer("http://5.6.7.8", "Landscape - Accenture")
+    ams3 = AdditionalManagementServer("http://10.10.10.10", "AMS3")
+    ms.add_additional_management_server(ams1)
+    ms.add_additional_management_server(ams2)
+    ms.add_additional_management_server(ams3)
+
+    print(ms.toJson())
+
+def garbage(email):
+    print("{, garbage''''''''}}}}}}}}{{{},garbage\n\r\n\n\n\n")
+
+def random_string(email):
+    numchars = random.randint(0,4096)
+    print(''.join(random.choice(string.printable) for x in range(numchars)))
+
+emailaddrs = {"b" : big,  #lots of domains/servers
+              "c" : citrix,
+              "d" : defaults,  #for easy testing of default ts
+              "e" : error,
+              "f" : freerdp,
+              "g" : garbage,
+              "m" : missing_fields,  #json missing some fields
+              "r" : random_string,
+              "v" : vmware,
+}
+
+def help():
+    helpstr = "Email address to retrieve server info for.  Currently "\
+        "the options are: "
+    emaillist = ""
+    for key in emailaddrs:
+        emaillist += key + ", "
+    helpstr += emaillist[:-2]
+    return helpstr
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('email', help=help())
+
+    args = parser.parse_args()
+
+    password = sys.stdin.read()
+
+    if args.email in emailaddrs:
+        if password != args.email:
+            print_error("Invalid password")
+            sys.exit(-1);
+        else:
+            emailaddrs[args.email](args.email)
+    else:
+        print_error("Invalid username")
+        sys.exit(-1);

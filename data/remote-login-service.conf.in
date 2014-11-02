@@ -1,0 +1,6 @@
+[Remote Login Service]
+Servers=Canonical
+
+[Server Canonical]
+_Name=Remote Login
+URI=https://uccs.landscape.canonical.com/

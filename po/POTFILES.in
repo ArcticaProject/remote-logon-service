@@ -1,0 +1,7 @@
+[type: gettext/ini] data/remote-login-service.conf.in
+src/server.c
+src/remote-login.c
+src/rdp-server.c
+src/citrix-server.c
+src/main.c
+src/uccs-server.c

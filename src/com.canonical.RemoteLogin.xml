@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<node name="/">
+	<interface name="com.canonical.RemoteLogin">
+		<!-- SERVER LIST DOCS - it's in a few places :-)
+			s: server type: "ica", "freerdp", "uccs"
+			s: server name
+			s: server uri
+			b: last used server
+			a(sbva{sv}): properties for the server
+				s: type: "username", "password", "domain", "email"
+				b: required
+				v: default value
+				a{sv}: properties for the value, currently only used for domains
+					that have a list of possible domains
+					"domains": a(s)
+					and domains that are read only
+					"read-only": b
+			a(si): applications pinned for the server
+				s: ID of the application (desktop file)
+				i: position the application is pinned in
+		-->
+
+<!-- Methods -->
+		<method name="GetServers">
+			<!-- Get the servers that are available on the local network
+				that don't need a login to get -->
+			<arg type="a(sssba(sbva{sv})a(si))" name="serverList" direction="out" />
+		</method>
+		<method name="GetServersForLogin">
+			<arg type="s" name="uri" direction="in" />
+			<arg type="s" name="emailAddress" direction="in" />
+			<arg type="s" name="password" direction="in" />
+			<arg type="b" name="allowCache" direction="in" />
+
+			<arg type="b" name="loginSuccess" direction="out" />
+			<arg type="s" name="dataType" direction="out">
+				<!-- Should be either "cached" or "network" depending on where the data
+					was gotten from -->
+			</arg>
+			<arg type="a(sssba(sbva{sv})a(si))" name="serverList" direction="out" />
+		</method>
+		<method name="GetCachedDomainsForServer">
+			<arg type="s" name="uri" direction="in" />
+			<arg type="as" name="domains" direction="out" />
+		</method>
+		<method name="SetApplicationsForServer">
+			<arg type="s" name="uccsUri" direction="in" />
+				<!-- UCCS URI is optional and only needed for servers that
+					are under a UCCS account.  NULL string if not used. -->
+			<arg type="s" name="serverUri" direction="in" />
+			<arg type="a(si)" name="applications" direction="in" />
+		</method>
+		<method name="SetLastUsedServer">
+			<arg type="s" name="uccsUri" direction="in" />
+			<arg type="s" name="serverUri" direction="in" />
+		</method>
+
+<!-- Signals -->
+		<signal name="ServersUpdated">
+			<arg type="a(sssba(sbva{sv})a(si))" name="serverList" direction="out" />
+		</signal>
+		<signal name="LoginServersUpdated">
+			<!-- Note: This IS NOT a broadcast signal, it will only be
+				signaled to folks who have previously called 'GetServersForLogin'
+				with a valid password -->
+			<arg type="s" name="uri" direction="out" />
+			<arg type="s" name="emailAddress" direction="out" />
+			<arg type="s" name="dataType" direction="out" />
+
+			<arg type="a(sssba(sbva{sv})a(si))" name="serverList" direction="out" />
+		</signal>
+		<signal name="LoginChanged">
+			<!-- This is sent if, for some reason, we think that the folks who
+				had previously called GetServersForLogin need to recall it.  Those
+				who do not will not be sent 'LoginServersUpdated' signals. -->
+			<arg type="s" name="uri" direction="out" />
+			<arg type="s" name="emailAddress" direction="out" />
+		</signal>
+
+	</interface>
+</node>

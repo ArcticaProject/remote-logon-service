@@ -1,0 +1,3 @@
+A small service to grab various remote login possibilities from the local
+network configuration, network servers that provide them, and present them
+to the user to log into for both applications and full desktop posibilities.

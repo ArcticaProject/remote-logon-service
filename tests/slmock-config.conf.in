@@ -1,0 +1,9 @@
+[Remote Login Service]
+Servers=SLMock Server
+
+[Server SLMock Server]
+Name=SLMock
+Type=UCCS
+URI=https://slmock.com/
+Exec=@slmock@
+NetworkRequired=None
