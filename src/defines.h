@@ -34,7 +34,6 @@
 #define CONFIG_SERVER_TYPE       "Type"
 #define CONFIG_SERVER_TYPE_RDP   "RDP"
 #define CONFIG_SERVER_TYPE_ICA   "ICA"
-#define CONFIG_SERVER_TYPE_X2GO  "X2GO"
 #define CONFIG_SERVER_TYPE_UCCS  "UCCS"
 
 #define JSON_PROTOCOL        "Protocol"
@@ -44,7 +43,5 @@
 #define JSON_PASSWORD        "Password"
 #define JSON_DOMAIN_REQ      "DomainRequired"
 #define JSON_DOMAIN          "WindowsDomain"
-#define JSON_SESSIONTYPE     "SessionType"
-#define JSON_SESSIONTYPE_REQ "SessionTypeRequired"
 
 #endif /* __DEFINES_H__ */

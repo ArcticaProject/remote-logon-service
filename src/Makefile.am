@@ -36,8 +36,6 @@ libservers_la_SOURCES = \
 	citrix-server.h \
 	rdp-server.c \
 	rdp-server.h \
-	x2go-server.c \
-	x2go-server.h \
 	uccs-server.c \
 	uccs-server.h \
 	defines.h \
