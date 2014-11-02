@@ -2,19 +2,21 @@
 <node name="/">
 	<interface name="com.canonical.RemoteLogin">
 		<!-- SERVER LIST DOCS - it's in a few places :-)
-			s: server type: "ica", "freerdp", "uccs"
+			s: server type: "ica", "freerdp", "x2go", "uccs"
 			s: server name
 			s: server uri
 			b: last used server
 			a(sbva{sv}): properties for the server
-				s: type: "username", "password", "domain", "email"
+				s: type: "username", "password", "domain", "email", "sessiontype"
 				b: required
 				v: default value
-				a{sv}: properties for the value, currently only used for domains
-					that have a list of possible domains
+				a{sv}: properties for the value
+					for value 'domain': a list of possible domains (ica, freerdp)
 					"domains": a(s)
-					and domains that are read only
+					for value 'domain': a list of domains that are read only
 					"read-only": b
+					for value 'sessiontype': TODO -> a subset of session profile parameters...
+					"nothing-yet": s
 			a(si): applications pinned for the server
 				s: ID of the application (desktop file)
 				i: position the application is pinned in

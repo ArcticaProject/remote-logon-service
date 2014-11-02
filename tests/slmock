@@ -78,6 +78,20 @@ def freerdp(email):
     ms.set_default(ts1.Name)
     print(ms.toJson())
 
+def x2go(email):
+    ms = ManagementServer("http://x2go.intern", "X2GoSessionBroker")
+    ts1 = TerminalServer("10.0.2.11", "X2Go Server 1", "x2go", False, 
+        "foo")
+    ts2 = TerminalServer("10.0.2.12", "X2Go Server 2", "x2go", False,
+        "bar")
+    ts3 = TerminalServer("10.0.2.13", "X2Go Server 3", "x2go", False,
+        "foobar")
+    ms.add_terminal_server(ts1)
+    ms.add_terminal_server(ts2)
+    ms.add_terminal_server(ts3)
+    ms.set_default(ts1.Name)
+    print(ms.toJson())
+
 def print_error(text):
     print("{ \"Error\": \"%s\" }" % text)
 
@@ -201,6 +215,7 @@ emailaddrs = {"b" : big,  #lots of domains/servers
               "d" : defaults,  #for easy testing of default ts
               "e" : error,
               "f" : freerdp,
+              "x" : x2go,
               "g" : garbage,
               "m" : missing_fields,  #json missing some fields
               "r" : random_string,

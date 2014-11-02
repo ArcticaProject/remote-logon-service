@@ -20,6 +20,7 @@
 #include "config.h"
 #endif
 
+#include <glib.h>
 #include <glib/gi18n.h>
 
 #include <json-glib/json-glib.h>
@@ -466,6 +467,10 @@ uccs_server_new_from_keyfile (GKeyFile * keyfile, const gchar * groupname)
 static gboolean
 parse_rds_array (UccsServer * server, JsonArray * array)
 {
+	// Got a new set of servers, delete the old one
+	g_list_free_full(server->subservers, g_object_unref);
+	server->subservers = NULL; 
+
 	int i;
 	for (i = 0; i < json_array_get_length(array); i++) {
 		JsonNode * node = json_array_get_element(array, i);
@@ -729,6 +734,8 @@ uccs_server_unlock (UccsServer * server, const gchar * address, const gchar * us
 		argv[0] = server->exec;
 		argv[1] = server->username;
 		argv[2] = NULL;
+
+		g_setenv("SERVER_ROOT", server->parent.uri, TRUE);
 
 		g_spawn_async_with_pipes(NULL, /* pwd */
 		                         (gchar **)argv,

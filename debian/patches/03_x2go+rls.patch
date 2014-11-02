@@ -1,0 +1,429 @@
+--- a/src/com.canonical.RemoteLogin.xml
++++ b/src/com.canonical.RemoteLogin.xml
+@@ -2,19 +2,21 @@
+ <node name="/">
+ 	<interface name="com.canonical.RemoteLogin">
+ 		<!-- SERVER LIST DOCS - it's in a few places :-)
+-			s: server type: "ica", "freerdp", "uccs"
++			s: server type: "ica", "freerdp", "x2go", "uccs"
+ 			s: server name
+ 			s: server uri
+ 			b: last used server
+ 			a(sbva{sv}): properties for the server
+-				s: type: "username", "password", "domain", "email"
++				s: type: "username", "password", "domain", "email", "sessiontype"
+ 				b: required
+ 				v: default value
+-				a{sv}: properties for the value, currently only used for domains
+-					that have a list of possible domains
++				a{sv}: properties for the value
++					for value 'domain': a list of possible domains (ica, freerdp)
+ 					"domains": a(s)
+-					and domains that are read only
++					for value 'domain': a list of domains that are read only
+ 					"read-only": b
++					for value 'sessiontype': TODO -> a subset of session profile parameters...
++					"nothing-yet": s
+ 			a(si): applications pinned for the server
+ 				s: ID of the application (desktop file)
+ 				i: position the application is pinned in
+--- a/src/server.c
++++ b/src/server.c
+@@ -25,6 +25,7 @@
+ #include "citrix-server.h"
+ #include "rdp-server.h"
+ #include "uccs-server.h"
++#include "x2go-server.h"
+ 
+ static void server_class_init (ServerClass *klass);
+ static void server_init       (Server *self);
+@@ -162,6 +163,9 @@
+ 	else if (g_strcmp0(proto, "freerdp") == 0 || g_strcmp0(proto, "rdp") == 0 || g_strcmp0(proto, "RDP") == 0 || g_strcmp0(proto, "FreeRDP") == 0) {
+ 		newserver = rdp_server_new_from_json(object);
+ 	}
++	else if (g_strcmp0(proto, "x2go") == 0 || g_strcmp0(proto, "X2go") == 0 || g_strcmp0(proto, "X2Go") == 0 || g_strcmp0(proto, "X2GO") == 0 || g_strcmp0(proto, "x2GO") == 0 || g_strcmp0(proto, "x2gO") == 0) {
++		newserver = x2go_server_new_from_json(object);
++	}
+ 
+ 	return newserver;
+ }
+@@ -184,6 +188,8 @@
+ 			g_variant_builder_add_value(&tuple, g_variant_new_string("freerdp"));
+ 		} else if (IS_UCCS_SERVER(server)) {
+ 			g_variant_builder_add_value(&tuple, g_variant_new_string("uccs"));
++		} else if (IS_X2GO_SERVER(server)) {
++			g_variant_builder_add_value(&tuple, g_variant_new_string("x2go"));
+ 		} else {
+ 			g_assert_not_reached();
+ 		}
+--- a/po/POTFILES.in
++++ b/po/POTFILES.in
+@@ -3,5 +3,6 @@
+ src/remote-login.c
+ src/rdp-server.c
+ src/citrix-server.c
++src/x2go-server.c
+ src/main.c
+ src/uccs-server.c
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -36,6 +36,8 @@
+ 	citrix-server.h \
+ 	rdp-server.c \
+ 	rdp-server.h \
++	x2go-server.c \
++	x2go-server.h \
+ 	uccs-server.c \
+ 	uccs-server.h \
+ 	defines.h \
+--- a/src/defines.h
++++ b/src/defines.h
+@@ -34,6 +34,7 @@
+ #define CONFIG_SERVER_TYPE       "Type"
+ #define CONFIG_SERVER_TYPE_RDP   "RDP"
+ #define CONFIG_SERVER_TYPE_ICA   "ICA"
++#define CONFIG_SERVER_TYPE_X2GO  "X2GO"
+ #define CONFIG_SERVER_TYPE_UCCS  "UCCS"
+ 
+ #define JSON_PROTOCOL        "Protocol"
+@@ -43,5 +44,7 @@
+ #define JSON_PASSWORD        "Password"
+ #define JSON_DOMAIN_REQ      "DomainRequired"
+ #define JSON_DOMAIN          "WindowsDomain"
++#define JSON_SESSIONTYPE     "SessionType"
++#define JSON_SESSIONTYPE_REQ "SessionTypeRequired"
+ 
+ #endif /* __DEFINES_H__ */
+--- a/src/main.c
++++ b/src/main.c
+@@ -33,6 +33,7 @@
+ #include "rdp-server.h"
+ #include "citrix-server.h"
+ #include "uccs-server.h"
++#include "x2go-server.h"
+ #include "crypt.h"
+ 
+ gint server_list_to_array (GVariantBuilder * builder, GList * items);
+--- /dev/null
++++ b/src/x2go-server.c
+@@ -0,0 +1,227 @@
++/*
++ * Copyright © 2012 Canonical Ltd.
++ * Copyright © 2013 Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
++ *
++ * This program is free software: you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License version 3, as
++ * published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope that it will be useful, but
++ * WITHOUT ANY WARRANTY; without even the implied warranties of
++ * MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
++ * PURPOSE.  See the GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License along
++ * with this program.  If not, see <http://www.gnu.org/licenses/>.
++ *
++ * Author: Ted Gould <ted@canonical.com>
++ * Modified for X2Go: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
++ */
++
++#ifdef HAVE_CONFIG_H
++#include "config.h"
++#endif
++
++#include <sys/mman.h>
++
++#include <glib/gi18n.h>
++
++#include <string.h>
++
++#include "x2go-server.h"
++#include "defines.h"
++
++static void x2go_server_class_init (X2GoServerClass *klass);
++static void x2go_server_init       (X2GoServer *self);
++static void x2go_server_dispose    (GObject *object);
++static void x2go_server_finalize   (GObject *object);
++static GVariant *  get_properties        (Server * server);
++
++G_DEFINE_TYPE (X2GoServer, x2go_server, SERVER_TYPE);
++
++static void
++x2go_server_class_init (X2GoServerClass *klass)
++{
++       GObjectClass *object_class = G_OBJECT_CLASS (klass);
++
++       object_class->dispose = x2go_server_dispose;
++       object_class->finalize = x2go_server_finalize;
++
++       ServerClass * server_class = SERVER_CLASS(klass);
++
++       server_class->get_properties = get_properties;
++
++       return;
++}
++
++static void
++x2go_server_init (X2GoServer *self)
++{
++       self->username = NULL;
++       self->password = NULL;
++       self->sessiontype = NULL;
++       self->sessiontype_required = FALSE;
++
++       return;
++}
++
++static void
++x2go_server_dispose (GObject *object)
++{
++
++       G_OBJECT_CLASS (x2go_server_parent_class)->dispose (object);
++       return;
++}
++
++/* Unlocks the memory before freeing */
++static void
++password_clear (gpointer data)
++{
++       char * pass = (char *)data;
++       munlock(pass, strlen(pass));
++       g_free(pass);
++       return;
++}
++
++static void
++x2go_server_finalize (GObject *object)
++{
++       X2GoServer * server = X2GO_SERVER(object);
++
++       g_clear_pointer(&server->username, g_free);
++       g_clear_pointer(&server->password, password_clear);
++       g_clear_pointer(&server->sessiontype, g_free);
++
++       G_OBJECT_CLASS (x2go_server_parent_class)->finalize (object);
++       return;
++}
++
++static GVariant *
++get_properties (Server * server)
++{
++       X2GoServer * rserver = X2GO_SERVER(server);
++
++       GVariantBuilder propbuilder;
++       g_variant_builder_init(&propbuilder, G_VARIANT_TYPE_ARRAY);
++
++       GVariantBuilder namebuilder;
++       g_variant_builder_init(&namebuilder, G_VARIANT_TYPE_TUPLE);
++       g_variant_builder_add_value(&namebuilder, g_variant_new_string("username"));
++       g_variant_builder_add_value(&namebuilder, g_variant_new_boolean(TRUE));
++       if (rserver->username == NULL) {
++               g_variant_builder_add_value(&namebuilder, g_variant_new_variant(g_variant_new_string("")));
++       } else {
++               g_variant_builder_add_value(&namebuilder, g_variant_new_variant(g_variant_new_string(rserver->username)));
++       }
++       g_variant_builder_add_value(&namebuilder, g_variant_parse(G_VARIANT_TYPE_VARDICT, "{}", NULL, NULL, NULL));
++       g_variant_builder_add_value(&propbuilder, g_variant_builder_end(&namebuilder));
++
++       GVariantBuilder passbuilder;
++       g_variant_builder_init(&passbuilder, G_VARIANT_TYPE_TUPLE);
++       g_variant_builder_add_value(&passbuilder, g_variant_new_string("password"));
++       g_variant_builder_add_value(&passbuilder, g_variant_new_boolean(TRUE));
++       if (rserver->password == NULL) {
++               g_variant_builder_add_value(&passbuilder, g_variant_new_variant(g_variant_new_string("")));
++       } else {
++               g_variant_builder_add_value(&passbuilder, g_variant_new_variant(g_variant_new_string(rserver->password)));
++       }
++       g_variant_builder_add_value(&passbuilder, g_variant_parse(G_VARIANT_TYPE_VARDICT, "{}", NULL, NULL, NULL));
++       g_variant_builder_add_value(&propbuilder, g_variant_builder_end(&passbuilder));
++
++       GVariantBuilder sessiontypebuilder;
++       g_variant_builder_init(&sessiontypebuilder, G_VARIANT_TYPE_TUPLE);
++       g_variant_builder_add_value(&sessiontypebuilder, g_variant_new_string("x2gosession"));
++       g_variant_builder_add_value(&sessiontypebuilder, g_variant_new_boolean(rserver->sessiontype_required));
++       if (rserver->sessiontype == NULL) {
++               g_variant_builder_add_value(&sessiontypebuilder, g_variant_new_variant(g_variant_new_string("")));
++       } else {
++               g_variant_builder_add_value(&sessiontypebuilder, g_variant_new_variant(g_variant_new_string(rserver->sessiontype)));
++       }
++       g_variant_builder_add_value(&sessiontypebuilder, g_variant_parse(G_VARIANT_TYPE_VARDICT, "{}", NULL, NULL, NULL));
++       g_variant_builder_add_value(&propbuilder, g_variant_builder_end(&sessiontypebuilder));
++
++       return g_variant_builder_end(&propbuilder);
++}
++
++Server *
++x2go_server_new_from_keyfile (GKeyFile * keyfile, const gchar * groupname)
++{
++       g_return_val_if_fail(keyfile != NULL, NULL); /* NOTE: No way to check if that's really a keyfile :-( */
++       g_return_val_if_fail(groupname != NULL, NULL);
++
++       if (!g_key_file_has_group(keyfile, groupname)) {
++               g_warning("Server specified but group '%s' was not found", groupname);
++               return NULL;
++       }
++
++       X2GoServer * server = g_object_new(X2GO_SERVER_TYPE, NULL);
++
++       if (g_key_file_has_key(keyfile, groupname, CONFIG_SERVER_NAME, NULL)) {
++               gchar * keyname = g_key_file_get_string(keyfile, groupname, CONFIG_SERVER_NAME, NULL);
++               server->parent.name = g_strdup(_(keyname));
++               g_free(keyname);
++       }
++
++       if (g_key_file_has_key(keyfile, groupname, CONFIG_SERVER_URI, NULL)) {
++               server->parent.uri = g_key_file_get_string(keyfile, groupname, CONFIG_SERVER_URI, NULL);
++       }
++
++       return SERVER(server);
++}
++
++/* Build the X2Go server from information in the JSON object */
++Server *
++x2go_server_new_from_json (JsonObject * object)
++{
++       X2GoServer * server = g_object_new(X2GO_SERVER_TYPE, NULL);
++
++       if (json_object_has_member(object, JSON_SERVER_NAME)) {
++               JsonNode * node = json_object_get_member(object, JSON_SERVER_NAME);
++               if (JSON_NODE_TYPE(node) == JSON_NODE_VALUE && json_node_get_value_type(node) == G_TYPE_STRING) {
++                       const gchar * name = json_node_get_string(node);
++                       server->parent.name = g_strdup(name);
++               }
++       }
++
++       if (json_object_has_member(object, JSON_URI)) {
++               JsonNode * node = json_object_get_member(object, JSON_URI);
++               if (JSON_NODE_TYPE(node) == JSON_NODE_VALUE && json_node_get_value_type(node) == G_TYPE_STRING) {
++                       const gchar * uri = json_node_get_string(node);
++                       server->parent.uri = g_strdup(uri);
++               }
++       }
++
++       if (json_object_has_member(object, JSON_USERNAME)) {
++               JsonNode * node = json_object_get_member(object, JSON_USERNAME);
++               if (JSON_NODE_TYPE(node) == JSON_NODE_VALUE && json_node_get_value_type(node) == G_TYPE_STRING) {
++                       const gchar * username = json_node_get_string(node);
++                       server->username = g_strdup(username);
++               }
++       }
++
++       if (json_object_has_member(object, JSON_PASSWORD)) {
++               JsonNode * node = json_object_get_member(object, JSON_PASSWORD);
++               if (JSON_NODE_TYPE(node) == JSON_NODE_VALUE && json_node_get_value_type(node) == G_TYPE_STRING) {
++                       const gchar * password = json_node_get_string(node);
++                       server->password = g_strdup(password);
++                       mlock(server->password, strlen(server->password));
++               }
++       }
++
++       if (json_object_has_member(object, JSON_SESSIONTYPE)) {
++               JsonNode * node = json_object_get_member(object, JSON_SESSIONTYPE);
++               if (JSON_NODE_TYPE(node) == JSON_NODE_VALUE && json_node_get_value_type(node) == G_TYPE_STRING) {
++                       const gchar * sessiontype = json_node_get_string(node);
++                       server->sessiontype = g_strdup(sessiontype);
++               }
++       }
++
++       if (json_object_has_member(object, JSON_SESSIONTYPE_REQ)) {
++               JsonNode * node = json_object_get_member(object, JSON_SESSIONTYPE_REQ);
++               if (JSON_NODE_TYPE(node) == JSON_NODE_VALUE && json_node_get_value_type(node) == G_TYPE_BOOLEAN) {
++                       server->sessiontype_required = json_node_get_boolean(node);
++               }
++       }
++
++       return SERVER(server);
++}
+--- /dev/null
++++ b/src/x2go-server.h
+@@ -0,0 +1,59 @@
++/*
++ * Copyright © 2012 Canonical Ltd.
++ * Copyright © 2013 Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
++ *
++ * This program is free software: you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License version 3, as
++ * published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope that it will be useful, but
++ * WITHOUT ANY WARRANTY; without even the implied warranties of
++ * MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
++ * PURPOSE.  See the GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License along
++ * with this program.  If not, see <http://www.gnu.org/licenses/>.
++ *
++ * Author: Ted Gould <ted@canonical.com>
++ * Modified for X2Go: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
++ */
++
++#ifndef __X2GO_SERVER_H__
++#define __X2GO_SERVER_H__
++
++#include <glib-object.h>
++#include <json-glib/json-glib.h>
++#include "server.h"
++
++G_BEGIN_DECLS
++
++#define X2GO_SERVER_TYPE            (x2go_server_get_type ())
++#define X2GO_SERVER(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), X2GO_SERVER_TYPE, X2GoServer))
++#define X2GO_SERVER_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), X2GO_SERVER_TYPE, X2GoServerClass))
++#define IS_X2GO_SERVER(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), X2GO_SERVER_TYPE))
++#define IS_X2GO_SERVER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), X2GO_SERVER_TYPE))
++#define X2GO_SERVER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), X2GO_SERVER_TYPE, X2GoServerClass))
++
++typedef struct _X2GoServer      X2GoServer;
++typedef struct _X2GoServerClass X2GoServerClass;
++
++struct _X2GoServerClass {
++       ServerClass parent_class;
++};
++
++struct _X2GoServer {
++       Server parent;
++
++       gchar * username;
++       gchar * password;
++       gchar * sessiontype;
++       gboolean sessiontype_required;
++};
++
++GType x2go_server_get_type (void);
++Server * x2go_server_new_from_keyfile (GKeyFile * keyfile, const gchar * name);
++Server * x2go_server_new_from_json (JsonObject * object);
++
++G_END_DECLS
++
++#endif
+--- a/tests/slmock
++++ b/tests/slmock
+@@ -78,6 +78,20 @@
+     ms.set_default(ts1.Name)
+     print(ms.toJson())
+ 
++def x2go(email):
++    ms = ManagementServer("http://x2go.intern", "X2GoSessionBroker")
++    ts1 = TerminalServer("10.0.2.11", "X2Go Server 1", "x2go", False, 
++        "foo")
++    ts2 = TerminalServer("10.0.2.12", "X2Go Server 2", "x2go", False,
++        "bar")
++    ts3 = TerminalServer("10.0.2.13", "X2Go Server 3", "x2go", False,
++        "foobar")
++    ms.add_terminal_server(ts1)
++    ms.add_terminal_server(ts2)
++    ms.add_terminal_server(ts3)
++    ms.set_default(ts1.Name)
++    print(ms.toJson())
++
+ def print_error(text):
+     print("{ \"Error\": \"%s\" }" % text)
+ 
+@@ -201,6 +215,7 @@
+               "d" : defaults,  #for easy testing of default ts
+               "e" : error,
+               "f" : freerdp,
++              "x" : x2go,
+               "g" : garbage,
+               "m" : missing_fields,  #json missing some fields
+               "r" : random_string,

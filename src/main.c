@@ -33,6 +33,7 @@
 #include "rdp-server.h"
 #include "citrix-server.h"
 #include "uccs-server.h"
+#include "x2go-server.h"
 #include "crypt.h"
 
 gint server_list_to_array (GVariantBuilder * builder, GList * items);
@@ -387,8 +388,10 @@ main (int argc, char * argv[])
 {
 	GError * error = NULL;
 
+#if !GLIB_CHECK_VERSION (2, 35, 1)
 	/* Init the GTypes */
 	g_type_init();
+#endif
 
 	/* Setup i18n */
 	setlocale (LC_ALL, ""); 
