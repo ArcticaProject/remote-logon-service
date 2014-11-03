@@ -12,6 +12,9 @@ Build-Depends: dbus-test-runner,
                libjson-glib-dev,
                libnm-glib-dev,
                libsoup2.4-dev,
+               dh-autoreconf,
+               libgtest-dev,
+               python,
                python3,
 Standards-Version: 3.9.3
 Homepage: http://launchpad.net/remote-login-service/
