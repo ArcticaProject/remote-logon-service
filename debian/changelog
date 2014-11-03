@@ -2,6 +2,8 @@ remote-login-service-x2go (1.0.0.1-0x2go1) UNRELEASED; urgency=medium
 
   * First forked/upstream release (1.0.0.1):
     - Apply patch 01_clear_servers.patch.
+    - Apply patch glib-deprecated.diff. Provide support for old
+      GLib versions.
   * Add SERVER_NAME env var support.
   * Add X2Go support to RLS.
   * Provide via ppa:x2go/ppa and ppa:x2go/stable on Launchpad.

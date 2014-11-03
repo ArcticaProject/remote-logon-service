@@ -571,7 +571,9 @@ test_dbus_suite (void)
 gint
 main (gint argc, gchar * argv[])
 {
+#if !GLIB_CHECK_VERSION (2, 35, 1)
 	g_type_init();
+#endif
 	g_test_init(&argc, &argv, NULL);
 
 	/* Test suites */
