@@ -8,6 +8,7 @@ remote-login-service-x2go (1.0.0-0x2go1) UNRELEASED; urgency=medium
   * debian/control:
     + Add B-Ds: dh-autoreconf, libgtest-dev, python. Enable the testsuite at build
       time.
+    + Bump Standards: to 3.9.6. No changes needed.
   * debian/source/format:
     + Switch back to source format 1.0.
 

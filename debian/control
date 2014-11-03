@@ -16,7 +16,7 @@ Build-Depends: dbus-test-runner,
                libgtest-dev,
                python,
                python3,
-Standards-Version: 3.9.3
+Standards-Version: 3.9.6
 Homepage: http://www.x2go.org
 Vcs-Git: git://code.x2go.org/remote-login-service-x2go.git
 Vcs-Browser: http://code.x2go.org/gitweb?p=remote-login-service-x2go.git;a=summary
