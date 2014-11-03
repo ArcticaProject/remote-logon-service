@@ -6,3 +6,6 @@
 override_dh_autoreconf:
 	touch ChangeLog
 	dh_autoreconf
+
+override_dh_auto_clean:
+	if [ -s ChangeLog ]; then rm -f ChangeLog; fi
