@@ -1,3 +1,6 @@
 A small service to grab various remote login possibilities from the local
 network configuration, network servers that provide them, and present them
 to the user to log into for both applications and full desktop posibilities.
+
+This project has been forked by the X2Go Project to support Remote Login
+against Linux machines via X2Go.
