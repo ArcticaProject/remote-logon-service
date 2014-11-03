@@ -1,5 +1,4 @@
-
-AC_INIT(remote-login-service, 1.0.0)
+AC_INIT(remote-login-service-x2go, 1.0.0.1)
 
 AC_PREREQ(2.53)
 AM_INIT_AUTOMAKE([])
@@ -30,7 +29,7 @@ PKG_CHECK_MODULES(TEST, dbustest-1)
 AC_CHECK_LIB(gcrypt, gcry_cipher_get_algo_keylen, GCRYPT_LIBS="-lgcrypt")
 
 if test x"$GCRYPT_LIBS" = x ; then
-	echo "You need libgcrypt to compile remote-login-service";
+	echo "You need libgcrypt to compile remote-login-service-x2go";
 	exit
 fi
 
