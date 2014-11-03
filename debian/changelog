@@ -8,6 +8,8 @@ remote-login-service-x2go (1.0.0-0x2go1) UNRELEASED; urgency=medium
   * debian/control:
     + Add B-Ds: dh-autoreconf, libgtest-dev, python. Enable the testsuite at build
       time.
+  * debian/source/format:
+    + Switch back to source format 1.0.
 
  -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Sun, 02 Nov 2014 21:36:41 +0100
 
