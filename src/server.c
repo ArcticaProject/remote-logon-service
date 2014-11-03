@@ -25,6 +25,7 @@
 #include "citrix-server.h"
 #include "rdp-server.h"
 #include "uccs-server.h"
+#include "x2go-server.h"
 
 static void server_class_init (ServerClass *klass);
 static void server_init       (Server *self);
@@ -162,6 +163,9 @@ server_new_from_json (JsonObject * object)
 	else if (g_strcmp0(proto, "freerdp") == 0 || g_strcmp0(proto, "rdp") == 0 || g_strcmp0(proto, "RDP") == 0 || g_strcmp0(proto, "FreeRDP") == 0) {
 		newserver = rdp_server_new_from_json(object);
 	}
+	else if (g_strcmp0(proto, "x2go") == 0 || g_strcmp0(proto, "X2go") == 0 || g_strcmp0(proto, "X2Go") == 0 || g_strcmp0(proto, "X2GO") == 0 || g_strcmp0(proto, "x2GO") == 0 || g_strcmp0(proto, "x2gO") == 0) {
+		newserver = x2go_server_new_from_json(object);
+	}
 
 	return newserver;
 }
@@ -184,6 +188,8 @@ server_get_variant (Server * server)
 			g_variant_builder_add_value(&tuple, g_variant_new_string("freerdp"));
 		} else if (IS_UCCS_SERVER(server)) {
 			g_variant_builder_add_value(&tuple, g_variant_new_string("uccs"));
+		} else if (IS_X2GO_SERVER(server)) {
+			g_variant_builder_add_value(&tuple, g_variant_new_string("x2go"));
 		} else {
 			g_assert_not_reached();
 		}

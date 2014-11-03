@@ -33,6 +33,7 @@
 #include "rdp-server.h"
 #include "citrix-server.h"
 #include "uccs-server.h"
+#include "x2go-server.h"
 #include "crypt.h"
 
 gint server_list_to_array (GVariantBuilder * builder, GList * items);
