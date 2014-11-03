@@ -466,6 +466,10 @@ uccs_server_new_from_keyfile (GKeyFile * keyfile, const gchar * groupname)
 static gboolean
 parse_rds_array (UccsServer * server, JsonArray * array)
 {
+	// Got a new set of servers, delete the old one
+	g_list_free_full(server->subservers, g_object_unref);
+	server->subservers = NULL;
+
 	int i;
 	for (i = 0; i < json_array_get_length(array); i++) {
 		JsonNode * node = json_array_get_element(array, i);

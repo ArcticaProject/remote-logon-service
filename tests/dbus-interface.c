@@ -184,9 +184,12 @@ slmock_check_login(GDBusConnection * session, slmock_table_t * slmockdata, gbool
 
 	GVariant * array = g_variant_get_child_value(retval, 2);
 	int i;
+	// Check all servers should be in the result are in the result
 	for (i = 0; slmockdata->servers[i].name != NULL; i++) {
 		g_assert(find_server(array, &slmockdata->servers[i]));
 	}
+	// Check there is no more servers in the result than we expected
+	g_assert(i == g_variant_n_children(array));
 	g_variant_unref(array);
 
 	g_variant_unref(retval);
