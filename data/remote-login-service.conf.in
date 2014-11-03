@@ -1,6 +1,6 @@
 [Remote Login Service]
-Servers=Canonical
+Servers=X2Go Session Broker
 
-[Server Canonical]
-_Name=Remote Login
-URI=https://uccs.landscape.canonical.com/
+[Server X2Go Session Broker]
+_Name=Remote Login X2Go
+URI=https://localhost:8080/uccs/inifile/
