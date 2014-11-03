@@ -1,4 +1,4 @@
-remote-login-service (1.0.0-0ubuntu3+x2go2~0ubuntu14.04.1) UNRELEASED; urgency=medium
+remote-login-service (1.0.0-0ubuntu3+x2go2~0ubuntu14.04.1) trusty; urgency=medium
 
   * debian/rules:
     + Build using dh_autoreconf.
@@ -6,7 +6,7 @@ remote-login-service (1.0.0-0ubuntu3+x2go2~0ubuntu14.04.1) UNRELEASED; urgency=m
     + Add B-Ds: dh-autoreconf, libgtest-dev, python. Enable the testsuite at build
       time.
 
- -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Mon, 03 Nov 2014 10:51:41 +0000
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Mon, 03 Nov 2014 12:08:02 +0100
 
 remote-login-service (1.0.0-0ubuntu3+x2go1~0ubuntu14.04.1) trusty; urgency=medium
 
