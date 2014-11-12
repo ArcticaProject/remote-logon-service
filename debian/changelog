@@ -16,6 +16,7 @@ remote-login-service-x2go (1.0.0.1-0x2go1) UNRELEASED; urgency=medium
     + Remove dummy ChangeLog file after build if empty.
   * debian/copyright:
     + Add Upstream-Contract: field. Add myself as copyright holder.
+    + Fix upstream source URL.
   * debian/control:
     + Add B-Ds: dh-autoreconf, libgtest-dev, python. Enable the testsuite at build
       time.

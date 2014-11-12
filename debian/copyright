@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: remote-login-service-x2go
 Upstream-Contact: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
-Source: http://code.x2go.org/gitweb?p=remote-login-service.with-x2go.git;a=summary
+Source: http://code.x2go.org/gitweb?p=remote-login-service-x2go.git;a=summary
 
 Files: *
 Copyright: 2012, Canonical Ltd.
