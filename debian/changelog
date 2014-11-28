@@ -10,6 +10,7 @@ remote-login-service-x2go (1.0.0.1-0x2go1) UNRELEASED; urgency=medium
     - Extend README file, inform about the RLS fork by X2Go.
     - remote-login-service.conf.in: Add URLs for default X2Go Session Broker
       installation.
+    - remote-login-service.conf.in: No https for localhost connections.
   * debian/rules:
     + Build using dh_autoreconf.
     + Make sure we have an empty upstream ChangeLog file when building from Git.
