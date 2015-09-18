@@ -1,9 +1,8 @@
-
 pkglibexec_PROGRAMS = \
-	remote-login-service
+	remote-logon-service
 
 EXTRA_DIST = \
-	com.canonical.RemoteLogin.xml
+	org.ArcticaProject.RemoteLogon.xml
 
 noinst_LTLIBRARIES = \
 	libservers.la \
@@ -14,14 +13,14 @@ noinst_LTLIBRARIES = \
 ################################
 
 libgenerated_la_SOURCES = \
-	remote-login.c \
-	remote-login.h
+	remote-logon.c \
+	remote-logon.h
 libgenerated_la_CFLAGS = \
 	$(SERVICE_CFLAGS)
-$(libgenerated_la_SOURCES): com.canonical.RemoteLogin.xml
+$(libgenerated_la_SOURCES): org.ArcticaProject.RemoteLogon.xml
 	gdbus-codegen \
-		--interface-prefix com.canonical \
-		--generate-c remote-login \
+		--interface-prefix org.ArcticaProject \
+		--generate-c remote-logon \
 		$^
 
 BUILT_SOURCES = $(libgenerated_la_SOURCES)
@@ -53,19 +52,18 @@ libservers_la_LDFLAGS = \
 	$(COVERAGE_LDFLAGS) $(GCRYPT_LIBS) -lm
 
 ################################
-# remote-login-service
+# remote-logon-service
 ################################
 
-remote_login_service_CFLAGS = \
-	-DDEFAULT_CONFIG_FILE="\"$(sysconfdir)/remote-login-service.conf\"" \
+remote_logon_service_CFLAGS = \
+	-DDEFAULT_CONFIG_FILE="\"$(sysconfdir)/remote-logon-service.conf\"" \
 	$(SERVICE_CFLAGS) \
 	$(COVERAGE_CFLAGS)
-remote_login_service_LDADD = \
+remote_logon_service_LDADD = \
 	$(builddir)/libservers.la \
 	$(builddir)/libgenerated.la \
 	$(SERVICE_LIBS)
-remote_login_service_LDFLAGS = \
+remote_logon_service_LDFLAGS = \
 	$(COVERAGE_LDFLAGS)
-remote_login_service_SOURCES = \
+remote_logon_service_SOURCES = \
 	main.c
-

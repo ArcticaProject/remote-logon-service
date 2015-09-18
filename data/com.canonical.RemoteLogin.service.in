@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=com.canonical.RemoteLogin
-Exec=@pkglibexecdir@/remote-login-service

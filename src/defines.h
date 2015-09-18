@@ -19,7 +19,7 @@
 #ifndef __DEFINES_H__
 #define __DEFINES_H__
 
-#define CONFIG_MAIN_GROUP "Remote Login Service"
+#define CONFIG_MAIN_GROUP "Remote Logon Service"
 #define CONFIG_MAIN_SERVERS   "Servers"
 #define CONFIG_SERVER_PREFIX  "Server"
 #define CONFIG_SERVER_NAME    "Name"

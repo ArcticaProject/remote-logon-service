@@ -1,0 +1,6 @@
+[Remote Logon Service]
+Servers=Session Broker
+
+[Server Session Broker]
+_Name=Remote Logon
+URI=http://localhost:8080/uccs/inifile/

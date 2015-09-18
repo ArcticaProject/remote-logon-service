@@ -180,9 +180,9 @@ clear_hash_helper (gpointer key, gpointer value, gpointer user_data)
 
 	g_dbus_connection_emit_signal(helper->session,
 	                              (const gchar *)key, /* dest */
-	                              "/com/canonical/RemoteLogin", /* object path */
-	                              "com.canonical.RemoteLogin", /* interface name */
-	                              "com.canonical.RemoteLogin.LoginChanged", /* signal name */
+	                              "/org/ArcticaProject/RemoteLogon", /* object path */
+	                              "org.ArcticaProject.RemoteLogon", /* interface name */
+	                              "org.ArcticaProject.RemoteLogon.LoginChanged", /* signal name */
 	                              helper->params, /* params */
 	                              &error);
 
@@ -807,7 +807,7 @@ uccs_server_get_servers (UccsServer * server, const gchar * address)
 	gchar *last_used_server_name = NULL;
 	if (server->username != NULL && server->password != NULL) {
 		gchar *username_sha = g_compute_checksum_for_string (G_CHECKSUM_SHA256, server->username, -1);
-		gchar *file_path = g_build_path ("/", g_get_user_cache_dir(), "remote-login-service", "cache", username_sha, NULL);
+		gchar *file_path = g_build_path ("/", g_get_user_cache_dir(), "remote-logon-service", "cache", username_sha, NULL);
 		gchar *encryptedContents;
 		gsize encryptedContentsLength;
 		if (g_file_get_contents (file_path, &encryptedContents, &encryptedContentsLength, NULL)) {
@@ -932,7 +932,7 @@ set_last_used_server (Server * server, const gchar * uri)
 			gchar *enc_data = do_aes_encrypt(data, UCCS_SERVER(server)->password, &enc_data_length);
 			g_free (data);
 
-			gchar *dir_path = g_build_path ("/", g_get_user_cache_dir(), "remote-login-service", "cache", NULL);
+			gchar *dir_path = g_build_path ("/", g_get_user_cache_dir(), "remote-logon-service", "cache", NULL);
 			gint status = g_mkdir_with_parents (dir_path, 0700);
 			if (status == 0)
 			{

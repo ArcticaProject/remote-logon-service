@@ -26,7 +26,7 @@
 /* NOTE: Required to build without optimizations */
 #include <locale.h>
 
-#include "remote-login.h"
+#include "remote-logon.h"
 #include "defines.h"
 
 #include "server.h"
@@ -51,7 +51,7 @@ error_domain (void)
 {
 	static GQuark value = 0;
 	if (value == 0) {
-		value = g_quark_from_static_string("remote-login-service");
+		value = g_quark_from_static_string("remote-logon-service");
 	}
 	return value;
 }
@@ -59,7 +59,7 @@ error_domain (void)
 /* When one of the state changes on the server emit that so that everone knows there
    might be a new server available. */
 static void
-server_status_updated (Server * server, ServerState newstate, RemoteLogin * rl)
+server_status_updated (Server * server, ServerState newstate, RemoteLogon * rl)
 {
 	GVariant * array = NULL;
 
@@ -73,14 +73,14 @@ server_status_updated (Server * server, ServerState newstate, RemoteLogin * rl)
 		array = g_variant_new_array(G_VARIANT_TYPE("(sssba(sbva{sv})a(si))"), NULL, 0);
 	}
 
-	remote_login_emit_servers_updated(rl, array);
+	remote_logon_emit_servers_updated(rl, array);
 	return;
 }
 
 /* Looks for the config file and does some basic parsing to pull out the UCCS servers
    that are configured in it */
 static void
-find_config_file (GKeyFile * parsed, const gchar * cmnd_line, RemoteLogin * rl)
+find_config_file (GKeyFile * parsed, const gchar * cmnd_line, RemoteLogon * rl)
 {
 	GError * error = NULL;
 	const gchar * file = DEFAULT_CONFIG_FILE;
@@ -151,7 +151,7 @@ server_list_to_array (GVariantBuilder * builder, GList * items)
 }
 
 static gboolean
-handle_get_servers (RemoteLogin * rl, GDBusMethodInvocation * invocation, gpointer user_data)
+handle_get_servers (RemoteLogon * rl, GDBusMethodInvocation * invocation, gpointer user_data)
 {
 	GVariant * array = NULL;
 
@@ -197,7 +197,7 @@ handle_get_servers_login_cb (UccsServer * server, gboolean unlocked, gpointer us
 
 /* Handle the GetServerForLogin DBus call */
 static gboolean
-handle_get_servers_login (RemoteLogin * rl, GDBusMethodInvocation * invocation, gpointer user_data)
+handle_get_servers_login (RemoteLogon * rl, GDBusMethodInvocation * invocation, gpointer user_data)
 {
 	GVariant * params = g_dbus_method_invocation_get_parameters(invocation);
 	const gchar * sender = g_dbus_method_invocation_get_sender(invocation);
@@ -283,7 +283,7 @@ handle_get_domains_list_helper (GList * list, const gchar * uri)
 
 /* Get the cached domains for a server */
 static gboolean
-handle_get_domains (RemoteLogin * rl, GDBusMethodInvocation * invocation, gpointer user_data)
+handle_get_domains (RemoteLogon * rl, GDBusMethodInvocation * invocation, gpointer user_data)
 {
 	GVariant * params = g_dbus_method_invocation_get_parameters(invocation);
 
@@ -321,7 +321,7 @@ handle_get_domains (RemoteLogin * rl, GDBusMethodInvocation * invocation, gpoint
 
 /* Set a given server as last used */
 static gboolean
-handle_set_last_used_server (RemoteLogin * rl, GDBusMethodInvocation * invocation, gpointer user_data)
+handle_set_last_used_server (RemoteLogon * rl, GDBusMethodInvocation * invocation, gpointer user_data)
 {
 	GVariant * params = g_dbus_method_invocation_get_parameters(invocation);
 
@@ -379,7 +379,7 @@ name_lost (GDBusConnection * connection, const gchar * name, gpointer user_data)
 static gchar * cmnd_line_config = NULL;
 
 static GOptionEntry general_options[] = {
-	{"config-file",  'c',  0,  G_OPTION_ARG_FILENAME,  &cmnd_line_config, N_("Configuration file for the remote login service.  Defaults to '/etc/remote-login-service.conf'."), N_("key_file")},
+	{"config-file",  'c',  0,  G_OPTION_ARG_FILENAME,  &cmnd_line_config, N_("Configuration file for the remote logon service.  Defaults to '/etc/remote-logon-service.conf'."), N_("key_file")},
 	{NULL}
 };
 
@@ -405,7 +405,7 @@ main (int argc, char * argv[])
 	/* Handle command line parameters */
 	GOptionContext * context;
 	context = g_option_context_new(_("- Determine the remote servers that can be logged into"));
-	g_option_context_add_main_entries(context, general_options, "remote-login-service");
+	g_option_context_add_main_entries(context, general_options, "remote-logon-service");
 
 	if (!g_option_context_parse(context, &argc, &argv, &error)) {
 		g_print("option parsing failed: %s\n", error->message);
@@ -422,11 +422,11 @@ main (int argc, char * argv[])
 	}
 
 	/* Build Dbus Interface */
-	RemoteLogin * skel = remote_login_skeleton_new();
+	RemoteLogon * skel = remote_logon_skeleton_new();
 	/* Export it */
 	g_dbus_interface_skeleton_export(G_DBUS_INTERFACE_SKELETON(skel),
 	                                 session_bus,
-	                                 "/com/canonical/RemoteLogin",
+	                                 "/org/ArcticaProject/RemoteLogon",
 	                                 NULL);
 	g_signal_connect(skel, "handle-get-servers", G_CALLBACK(handle_get_servers), NULL);
 	g_signal_connect(skel, "handle-get-servers-for-login", G_CALLBACK(handle_get_servers_login), NULL);
@@ -434,7 +434,7 @@ main (int argc, char * argv[])
 	g_signal_connect(skel, "handle-set-last-used-server", G_CALLBACK(handle_set_last_used_server), NULL);
 
 	g_bus_own_name_on_connection(session_bus,
-	                             "com.canonical.RemoteLogin",
+	                             "org.ArcticaProject.RemoteLogon",
 	                             G_BUS_NAME_OWNER_FLAGS_NONE,
 	                             NULL, /* aquired handler */
 	                             name_lost,

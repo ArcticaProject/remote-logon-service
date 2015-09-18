@@ -1,4 +1,4 @@
-AC_INIT(remote-login-service-x2go, 1.0.0.1)
+AC_INIT(remote-logon-service, 1.0.0.1)
 
 AC_PREREQ(2.53)
 AM_INIT_AUTOMAKE([])
@@ -29,7 +29,7 @@ PKG_CHECK_MODULES(TEST, dbustest-1)
 AC_CHECK_LIB(gcrypt, gcry_cipher_get_algo_keylen, GCRYPT_LIBS="-lgcrypt")
 
 if test x"$GCRYPT_LIBS" = x ; then
-	echo "You need libgcrypt to compile remote-login-service-x2go";
+	echo "You need libgcrypt to compile remote-logon-service";
 	exit
 fi
 
@@ -88,7 +88,7 @@ AC_SUBST(GCRYPT_LIBS)
 ###########################
 
 IT_PROG_INTLTOOL([0.35.0])
-GETTEXT_PACKAGE=remote-login-service
+GETTEXT_PACKAGE=remote-logon-service
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext package])
 AC_DEFINE_PATH(LOCALEDIR, "${datadir}/locale", [locale directory])

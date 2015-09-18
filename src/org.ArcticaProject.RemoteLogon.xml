@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <node name="/">
-	<interface name="com.canonical.RemoteLogin">
+	<interface name="org.ArcticaProject.RemoteLogon">
 		<!-- SERVER LIST DOCS - it's in a few places :-)
 			s: server type: "ica", "freerdp", "x2go", "uccs"
 			s: server name

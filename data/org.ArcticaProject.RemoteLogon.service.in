@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.ArcticaProject.RemoteLogon
+Exec=@pkglibexecdir@/remote-logon-service

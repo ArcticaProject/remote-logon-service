@@ -1,4 +1,6 @@
-remote-login-service-x2go (1.0.0.1-0x2go1) UNRELEASED; urgency=medium
+remote-logon-service (1.0.0.1-0x2go1) UNRELEASED; urgency=medium
+
+  * Rename src:package and bin:package: -> remote-logon-service.
 
   * First forked/upstream release (1.0.0.1):
     - Apply patch 01_clear_servers.patch.

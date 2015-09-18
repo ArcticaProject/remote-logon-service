@@ -1,6 +1,0 @@
-[Remote Login Service]
-Servers=X2Go Session Broker
-
-[Server X2Go Session Broker]
-_Name=Remote Login X2Go
-URI=http://localhost:8080/uccs/inifile/

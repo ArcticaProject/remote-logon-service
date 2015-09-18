@@ -60,7 +60,7 @@ slmock-config.conf: slmock-config.conf.in
 dbus_interface_SOURCES = \
 	dbus-interface.c
 dbus_interface_CFLAGS = \
-	-DREMOTE_LOGIN_SERVICE="\"$(abs_top_builddir)/src/remote-login-service\"" \
+	-DREMOTE_LOGON_SERVICE="\"$(abs_top_builddir)/src/remote-logon-service\"" \
 	-DUCCS_CONFIG_FILE="\"$(abs_srcdir)/uccs-config.conf\"" \
 	-DSLMOCK_CONFIG_FILE="\"$(abs_builddir)/slmock-config.conf\"" \
 	-DNULL_CONFIG_FILE="\"$(abs_srcdir)/null-config.conf\"" \

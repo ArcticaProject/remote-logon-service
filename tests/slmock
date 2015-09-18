@@ -65,7 +65,7 @@ def convert_to_builtin_type(obj):
     return d
 
 def freerdp(email):
-    ms = ManagementServer("http://tc.canonical.com", "Landscape")
+    ms = ManagementServer("http://tc.arctica-project.org", "Landscape")
     ts1 = TerminalServer("23.21.151.133", "FreeRDP US", "freerdp", False, 
         "Administrator")
     ts2 = TerminalServer("46.137.222.181", "FreeRDP Asia", "freerdp", False,
@@ -99,7 +99,7 @@ def error(email):
     print_error("Server did not respond")
 
 def citrix(email):
-    ms = ManagementServer("http://tc.canonical.com", "Landscape")
+    ms = ManagementServer("http://tc.arctica-project.org", "Landscape")
     ts1 = TerminalServer("107.21.17.35", "Citrix USA", "ICA", True, 
         "useradmin1")
     ts2 = TerminalServer("107.21.17.35", "Citrix 2", "ICA", True,
@@ -119,7 +119,7 @@ def citrix(email):
     print(ms.toJson())
 
 def vmware(email):
-    ms = ManagementServer("http://tc.canonical.com", "Landscape")
+    ms = ManagementServer("http://tc.arctica-project.org", "Landscape")
     ts = TerminalServer("https://10.193.37.140", "VMWare-View Lexington", 
         "vmware", True, "Administrator")
     ts.add_domain("VMWARE")
@@ -127,7 +127,7 @@ def vmware(email):
     print(ms.toJson())
 
 def defaults(email):
-    ms = ManagementServer("http://tc.canonical.com", "Landscape")
+    ms = ManagementServer("http://tc.arctica-project.org", "Landscape")
     ts1 = TerminalServer("https://10.10.10.10", "AAA", "vmware")
     ts2 = TerminalServer("https://10.10.10.10", "ZZZ", "vmware")
     ts3 = TerminalServer("https://10.10.10.10", "MMM-Default", "vmware", True)
@@ -143,7 +143,7 @@ def defaults(email):
 # a choice of random problems in the json that the parser should catch
 def missing_fields(email):
     val = random.randint(1,4)
-    ms = ManagementServer("http://tc.canonical.com", "Landscape")
+    ms = ManagementServer("http://tc.arctica-project.org", "Landscape")
     ts3 = TerminalServer("https://10.10.10.10", "TS1-Default", "vmware", True)
     ts3.add_domain("VMWARE")
     ms.set_default(ts3.Name)
@@ -169,7 +169,7 @@ def missing_fields(email):
     print(ms.toJson())
 
 def big(email):
-    ms = ManagementServer("http://tc.canonical.com", "Landscape")
+    ms = ManagementServer("http://tc.arctica-project.org", "Landscape")
 
     ts1 = TerminalServer("107.21.17.35", "XenServer", "ICA")
     ts2 = TerminalServer("http://1.2.3.4", "Citrix2", "ICA", True, 

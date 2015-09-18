@@ -1,6 +1,6 @@
-[type: gettext/ini] data/remote-login-service.conf.in
+[type: gettext/ini] data/remote-logon-service.conf.in
 src/server.c
-src/remote-login.c
+src/remote-logon.c
 src/rdp-server.c
 src/citrix-server.c
 src/x2go-server.c

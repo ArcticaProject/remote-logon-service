@@ -150,15 +150,15 @@ slmock_check_login(GDBusConnection * session, slmock_table_t * slmockdata, gbool
 {
 	if (clear_cache) {
 		gchar *username_sha = g_compute_checksum_for_string (G_CHECKSUM_SHA256, slmockdata->username, -1);
-		gchar *file_path = g_build_path ("/", g_get_user_cache_dir(), "remote-login-service", "cache", username_sha, NULL);
+		gchar *file_path = g_build_path ("/", g_get_user_cache_dir(), "remote-logon-service", "cache", username_sha, NULL);
 		unlink (file_path);
 		g_free (username_sha);
 		g_free (file_path);
 	}
 	GVariant * retval = g_dbus_connection_call_sync(session,
-	                                                "com.canonical.RemoteLogin",
-	                                                "/com/canonical/RemoteLogin",
-	                                                "com.canonical.RemoteLogin",
+	                                                "org.ArcticaProject.RemoteLogon",
+	                                                "/org/ArcticaProject/RemoteLogon",
+	                                                "org.ArcticaProject.RemoteLogon",
 	                                                "GetServersForLogin",
 	                                                g_variant_new("(sssb)",
 	                                                              "https://slmock.com/",
@@ -203,13 +203,13 @@ test_getservers_slmock (gconstpointer data)
 	DbusTestService * service = dbus_test_service_new(NULL);
 
 	/* RLS */
-	DbusTestProcess * rls = dbus_test_process_new(REMOTE_LOGIN_SERVICE);
+	DbusTestProcess * rls = dbus_test_process_new(REMOTE_LOGON_SERVICE);
 	dbus_test_process_append_param(rls, "--config-file=" SLMOCK_CONFIG_FILE);
 	dbus_test_service_add_task(service, DBUS_TEST_TASK(rls));
 
 	/* Dummy */
 	DbusTestTask * dummy = dbus_test_task_new();
-	dbus_test_task_set_wait_for(dummy, "com.canonical.RemoteLogin");
+	dbus_test_task_set_wait_for(dummy, "org.ArcticaProject.RemoteLogon");
 	dbus_test_service_add_task(service, dummy);
 
 	/* Get RLS up and running and us on that bus */
@@ -233,13 +233,13 @@ test_getservers_slmock_none (void)
 	DbusTestService * service = dbus_test_service_new(NULL);
 
 	/* RLS */
-	DbusTestProcess * rls = dbus_test_process_new(REMOTE_LOGIN_SERVICE);
+	DbusTestProcess * rls = dbus_test_process_new(REMOTE_LOGON_SERVICE);
 	dbus_test_process_append_param(rls, "--config-file=" SLMOCK_CONFIG_FILE);
 	dbus_test_service_add_task(service, DBUS_TEST_TASK(rls));
 
 	/* Dummy */
 	DbusTestTask * dummy = dbus_test_task_new();
-	dbus_test_task_set_wait_for(dummy, "com.canonical.RemoteLogin");
+	dbus_test_task_set_wait_for(dummy, "org.ArcticaProject.RemoteLogon");
 	dbus_test_service_add_task(service, dummy);
 
 	/* Get RLS up and running and us on that bus */
@@ -249,9 +249,9 @@ test_getservers_slmock_none (void)
 	g_dbus_connection_set_exit_on_close(session, FALSE);
 
 	GVariant * retval = g_dbus_connection_call_sync(session,
-	                                                "com.canonical.RemoteLogin",
-	                                                "/com/canonical/RemoteLogin",
-	                                                "com.canonical.RemoteLogin",
+	                                                "org.ArcticaProject.RemoteLogon",
+	                                                "/org/ArcticaProject/RemoteLogon",
+	                                                "org.ArcticaProject.RemoteLogon",
 	                                                "GetServersForLogin",
 	                                                g_variant_new("(sssb)",
 	                                                              "https://slmock.com/",
@@ -289,13 +289,13 @@ test_getservers_slmock_two (void)
 	DbusTestService * service = dbus_test_service_new(NULL);
 
 	/* RLS */
-	DbusTestProcess * rls = dbus_test_process_new(REMOTE_LOGIN_SERVICE);
+	DbusTestProcess * rls = dbus_test_process_new(REMOTE_LOGON_SERVICE);
 	dbus_test_process_append_param(rls, "--config-file=" SLMOCK_CONFIG_FILE);
 	dbus_test_service_add_task(service, DBUS_TEST_TASK(rls));
 
 	/* Dummy */
 	DbusTestTask * dummy = dbus_test_task_new();
-	dbus_test_task_set_wait_for(dummy, "com.canonical.RemoteLogin");
+	dbus_test_task_set_wait_for(dummy, "org.ArcticaProject.RemoteLogon");
 	dbus_test_service_add_task(service, dummy);
 
 	/* Get RLS up and running and us on that bus */
@@ -320,13 +320,13 @@ test_getservers_none (void)
 	DbusTestService * service = dbus_test_service_new(NULL);
 
 	/* RLS */
-	DbusTestProcess * rls = dbus_test_process_new(REMOTE_LOGIN_SERVICE);
+	DbusTestProcess * rls = dbus_test_process_new(REMOTE_LOGON_SERVICE);
 	dbus_test_process_append_param(rls, "--config-file=" NULL_CONFIG_FILE);
 	dbus_test_service_add_task(service, DBUS_TEST_TASK(rls));
 
 	/* Dummy */
 	DbusTestTask * dummy = dbus_test_task_new();
-	dbus_test_task_set_wait_for(dummy, "com.canonical.RemoteLogin");
+	dbus_test_task_set_wait_for(dummy, "org.ArcticaProject.RemoteLogon");
 	dbus_test_service_add_task(service, dummy);
 
 	/* Get RLS up and running and us on that bus */
@@ -336,9 +336,9 @@ test_getservers_none (void)
 	g_dbus_connection_set_exit_on_close(session, FALSE);
 
 	GVariant * retval = g_dbus_connection_call_sync(session,
-	                                                "com.canonical.RemoteLogin",
-	                                                "/com/canonical/RemoteLogin",
-	                                                "com.canonical.RemoteLogin",
+	                                                "org.ArcticaProject.RemoteLogon",
+	                                                "/org/ArcticaProject/RemoteLogon",
+	                                                "org.ArcticaProject.RemoteLogon",
 	                                                "GetServers",
 	                                                NULL, /* params */
 	                                                G_VARIANT_TYPE("(a(sssba(sbva{sv})a(si)))"), /* ret type */
@@ -370,13 +370,13 @@ test_getservers_uccs (void)
 	DbusTestService * service = dbus_test_service_new(NULL);
 
 	/* RLS */
-	DbusTestProcess * rls = dbus_test_process_new(REMOTE_LOGIN_SERVICE);
+	DbusTestProcess * rls = dbus_test_process_new(REMOTE_LOGON_SERVICE);
 	dbus_test_process_append_param(rls, "--config-file=" UCCS_CONFIG_FILE);
 	dbus_test_service_add_task(service, DBUS_TEST_TASK(rls));
 
 	/* Dummy */
 	DbusTestTask * dummy = dbus_test_task_new();
-	dbus_test_task_set_wait_for(dummy, "com.canonical.RemoteLogin");
+	dbus_test_task_set_wait_for(dummy, "org.ArcticaProject.RemoteLogon");
 	dbus_test_service_add_task(service, dummy);
 
 	/* Get RLS up and running and us on that bus */
@@ -386,9 +386,9 @@ test_getservers_uccs (void)
 	g_dbus_connection_set_exit_on_close(session, FALSE);
 
 	GVariant * retval = g_dbus_connection_call_sync(session,
-	                                                "com.canonical.RemoteLogin",
-	                                                "/com/canonical/RemoteLogin",
-	                                                "com.canonical.RemoteLogin",
+	                                                "org.ArcticaProject.RemoteLogon",
+	                                                "/org/ArcticaProject/RemoteLogon",
+	                                                "org.ArcticaProject.RemoteLogon",
 	                                                "GetServers",
 	                                                NULL, /* params */
 	                                                G_VARIANT_TYPE("(a(sssba(sbva{sv})a(si)))"), /* ret type */
@@ -444,13 +444,13 @@ test_getdomains_basic (void)
 	DbusTestService * service = dbus_test_service_new(NULL);
 
 	/* RLS */
-	DbusTestProcess * rls = dbus_test_process_new(REMOTE_LOGIN_SERVICE);
+	DbusTestProcess * rls = dbus_test_process_new(REMOTE_LOGON_SERVICE);
 	dbus_test_process_append_param(rls, "--config-file=" SLMOCK_CONFIG_FILE);
 	dbus_test_service_add_task(service, DBUS_TEST_TASK(rls));
 
 	/* Dummy */
 	DbusTestTask * dummy = dbus_test_task_new();
-	dbus_test_task_set_wait_for(dummy, "com.canonical.RemoteLogin");
+	dbus_test_task_set_wait_for(dummy, "org.ArcticaProject.RemoteLogon");
 	dbus_test_service_add_task(service, dummy);
 
 	/* Get RLS up and running and us on that bus */
@@ -461,9 +461,9 @@ test_getdomains_basic (void)
 
 	GError * error = NULL;
 	GVariant * retval = g_dbus_connection_call_sync(session,
-	                                                "com.canonical.RemoteLogin",
-	                                                "/com/canonical/RemoteLogin",
-	                                                "com.canonical.RemoteLogin",
+	                                                "org.ArcticaProject.RemoteLogon",
+	                                                "/org/ArcticaProject/RemoteLogon",
+	                                                "org.ArcticaProject.RemoteLogon",
 	                                                "GetCachedDomainsForServer",
 	                                                g_variant_new("(s)", "https://slmock.com/"), /* params */
 	                                                G_VARIANT_TYPE("(as)"), /* ret type */
@@ -501,13 +501,13 @@ test_setlastused_basic (void)
 	DbusTestService * service = dbus_test_service_new(NULL);
 
 	/* RLS */
-	DbusTestProcess * rls = dbus_test_process_new(REMOTE_LOGIN_SERVICE);
+	DbusTestProcess * rls = dbus_test_process_new(REMOTE_LOGON_SERVICE);
 	dbus_test_process_append_param(rls, "--config-file=" SLMOCK_CONFIG_FILE);
 	dbus_test_service_add_task(service, DBUS_TEST_TASK(rls));
 
 	/* Dummy */
 	DbusTestTask * dummy = dbus_test_task_new();
-	dbus_test_task_set_wait_for(dummy, "com.canonical.RemoteLogin");
+	dbus_test_task_set_wait_for(dummy, "org.ArcticaProject.RemoteLogon");
 	dbus_test_service_add_task(service, dummy);
 
 	/* Get RLS up and running and us on that bus */
@@ -520,9 +520,9 @@ test_setlastused_basic (void)
 
 	GError * error = NULL;
 	GVariant * retval = g_dbus_connection_call_sync(session,
-	                                                "com.canonical.RemoteLogin",
-	                                                "/com/canonical/RemoteLogin",
-	                                                "com.canonical.RemoteLogin",
+	                                                "org.ArcticaProject.RemoteLogon",
+	                                                "/org/ArcticaProject/RemoteLogon",
+	                                                "org.ArcticaProject.RemoteLogon",
 	                                                "SetLastUsedServer",
 	                                                g_variant_new("(ss)", "Landscape", freerdp_server_table[1].uri), /* params */
 	                                                NULL, /* ret type */

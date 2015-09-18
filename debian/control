@@ -1,4 +1,4 @@
-Source: remote-login-service-x2go
+Source: remote-logon-service
 Section: misc
 Priority: extra
 Maintainer: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
@@ -18,15 +18,17 @@ Build-Depends: dbus-test-runner,
                python3,
 Standards-Version: 3.9.6
 Homepage: http://www.x2go.org
-Vcs-Git: git://code.x2go.org/remote-login-service-x2go.git
-Vcs-Browser: http://code.x2go.org/gitweb?p=remote-login-service-x2go.git;a=summary
+Vcs-Git: git://code.x2go.org/remote-logon-service.git
+Vcs-Browser: http://code.x2go.org/gitweb?p=remote-logon-service.git;a=summary
 
-Package: remote-login-service-x2go
+Package: remote-logon-service
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-Breaks: remote-login-service
-Replaces: remote-login-service
+#Breaks: remote-login-service,
+#        remote-logon-services-x2go (<< 1.0.0.2),
+#Replaces: remote-login-service,
+#          remote-login-services-x2go (<< 1.0.0.2),
 Recommends: thin-client-config-agent
 Description: Service to track the remote servers to use
  A small service to take the various sources for the remote
