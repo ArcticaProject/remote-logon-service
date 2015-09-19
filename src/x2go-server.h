@@ -1,6 +1,7 @@
 /*
  * Copyright © 2012 Canonical Ltd.
  * Copyright © 2013 Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
+ * Copyright © 2015 The Arctica Project
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as
@@ -14,8 +15,8 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Author: Ted Gould <ted@canonical.com>
- * Modified for X2Go: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
+ * Authors: Ted Gould <ted@canonical.com>
+ *          Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
  */
 
 #ifndef __X2GO_SERVER_H__
