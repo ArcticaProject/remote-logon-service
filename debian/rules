@@ -9,3 +9,4 @@ override_dh_autoreconf:
 
 override_dh_auto_clean:
 	if [ -s ChangeLog ]; then rm -f ChangeLog; fi
+	dh_auto_clean
