@@ -1,11 +1,18 @@
 #!/usr/bin/make -f
 
+BUILD_HOME=debian/build-home
+
 %:
 	dh $@ --with autoreconf
 
 override_dh_autoreconf:
 	touch ChangeLog
 	dh_autoreconf
+
+override_dh_auto_test:
+	mkdir -p $(BUILD_HOME)
+	HOME=$(BUILD_HOME) dh_auto_test
+	rm -Rfv $(BUILD_HOME)
 
 override_dh_auto_clean:
 	if [ -s ChangeLog ]; then rm -f ChangeLog; fi
