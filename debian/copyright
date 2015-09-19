@@ -5,12 +5,13 @@ Source: http://code.x2go.org/gitweb?p=remote-logon-service-x2go.git;a=summary
 
 Files: *
 Copyright: 2012, Canonical Ltd.
-           2012-2014, Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
+           2013, Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
+           2015, The Arctica Project
 License: GPL-3
 
 Files: debian/*
 Copyright: 2012, Canonical Ltd.
-           2012-2014, Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
+           2012-2015, Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
 License: GPL-3
 
 License: GPL-3
