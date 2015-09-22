@@ -37,26 +37,28 @@ test_update_signal (void)
 	Server * server = NULL;
 	server = server_new_from_keyfile(keyfile, groupname);
 	g_assert(server != NULL);
-	g_assert(g_strcmp0(server->name, "My Server") == 0);
-	g_assert(g_strcmp0(server->uri, "http://my.domain.com") == 0);
 
 	UccsServer * userver = UCCS_SERVER(server);
 	g_assert(userver != NULL);
 
 	gboolean signaled = FALSE;
 	g_signal_connect(G_OBJECT(server), SERVER_SIGNAL_STATE_CHANGED, G_CALLBACK(state_signal), &signaled);
-
-	if (server->state == SERVER_STATE_ALLGOOD) {
-		signaled = FALSE;
-		uccs_server_set_exec(userver, "thisshouldnotexist");
-		g_assert(signaled);
-		g_assert(server->state == SERVER_STATE_UNAVAILABLE);
-	}
+	server->state = SERVER_STATE_UNAVAILABLE;
 
 	signaled = FALSE;
-	uccs_server_set_exec(userver, "ls");
+	uccs_notify_state_change(userver);
+	/* a change from available to good is notified */
 	g_assert(signaled);
 	g_assert(server->state == SERVER_STATE_ALLGOOD);
+
+	signaled = FALSE;
+	server->state = SERVER_STATE_ALLGOOD;
+	userver->last_network = NM_STATE_DISCONNECTED;
+	userver->min_network = NM_STATE_CONNECTED_GLOBAL;
+	uccs_notify_state_change(userver);
+	/* if the server becomes unavailable, it is notified as well */
+	g_assert(signaled);
+	g_assert(server->state == SERVER_STATE_UNAVAILABLE);
 
 	return;
 }

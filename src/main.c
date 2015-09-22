@@ -68,12 +68,16 @@ server_status_updated (Server * server, ServerState newstate, RemoteLogon * rl)
 	GVariantBuilder builder;
 	g_variant_builder_init(&builder, G_VARIANT_TYPE_ARRAY);
 
-	if (server_list_to_array(&builder, config_file_servers) > 0) {
+	gint servers = server_list_to_array(&builder, config_file_servers);
+	if (servers > 0) {
 		array = g_variant_builder_end(&builder);
 	} else {
 		g_variant_builder_clear(&builder);
 		array = g_variant_new_array(G_VARIANT_TYPE("(sssba(sbva{sv})a(si))"), NULL, 0);
 	}
+
+	g_debug ("%d server(s) available", servers);
+	g_debug ("Signalling state change to: %d", newstate);
 
 	remote_logon_emit_servers_updated(rl, array);
 	return;
@@ -166,6 +170,8 @@ handle_get_servers (RemoteLogon * rl, GDBusMethodInvocation * invocation, gpoint
 		g_variant_builder_clear(&builder);
 		array = g_variant_new_array(G_VARIANT_TYPE("(sssba(sbva{sv})a(si))"), NULL, 0);
 	}
+
+	g_debug ("handle_get_servers: returning %s", g_variant_print (array, FALSE));
 
 	g_dbus_method_invocation_return_value(invocation, g_variant_new_tuple(&array, 1));
 

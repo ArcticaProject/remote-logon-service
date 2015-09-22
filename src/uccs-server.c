@@ -50,7 +50,6 @@ static void json_waiters_notify (UccsServer * server, gboolean unlocked);
 static GVariant * get_cached_domains (Server * server);
 static Server * find_uri (Server * server, const gchar * uri);
 static void set_last_used_server (Server * server, const gchar * uri);
-static void evaluate_state (UccsServer * server);
 static void nm_state_changed (NMClient *client, const GParamSpec *pspec, gpointer user_data);
 
 typedef struct _json_callback_t json_callback_t;
@@ -136,21 +135,17 @@ uccs_server_init (UccsServer *self)
 	self->session = soup_session_sync_new();
 
 	nm_state_changed(self->nm_client, NULL, self);
-	evaluate_state(self);
+	uccs_notify_state_change(self);
 
 	return;
 }
 
-/* Small function to try and figure out the state of the server and set the
-   status appropriately */
-static void
-evaluate_state (UccsServer * server)
+/* Small function to try and figure out the state of the server and notify of
+   status changes appropriately */
+void
+uccs_notify_state_change (UccsServer * server)
 {
 	ServerState tempstate = SERVER_STATE_ALLGOOD;
-
-	if (server->exec == NULL) {
-		tempstate = SERVER_STATE_UNAVAILABLE;
-	}
 
 	if (server->last_network < server->min_network) {
 		tempstate = SERVER_STATE_UNAVAILABLE;
@@ -318,7 +313,7 @@ verify_server_cb (SoupSession * session, SoupMessage * message, gpointer user_da
 		server->verified_server = FALSE;
 	}
 
-	evaluate_state(server);
+	uccs_notify_state_change(server);
 
 	return;
 }
@@ -362,7 +357,7 @@ nm_state_changed (NMClient *client, const GParamSpec *pspec, gpointer user_data)
 		verify_server(server);
 	}
 
-	evaluate_state(server);
+	uccs_notify_state_change(server);
 
 	return;
 }
@@ -400,12 +395,11 @@ uccs_server_set_exec (UccsServer * server, const gchar * exec)
 	g_return_val_if_fail(IS_UCCS_SERVER(server), NULL);
 
 	g_clear_pointer(&server->exec, g_free);
+	server->exec = g_find_program_in_path(exec);
 
-	if (exec != NULL) {
-		server->exec = g_find_program_in_path(exec);
+	if (server->exec == NULL) {
+		g_warning ("unable to find program %s", exec);
 	}
-
-	evaluate_state(server);
 
 	return server->exec;
 }
@@ -459,7 +453,7 @@ uccs_server_new_from_keyfile (GKeyFile * keyfile, const gchar * groupname)
 		server->verify_server = g_key_file_get_boolean(keyfile, groupname, CONFIG_UCCS_VERIFY, NULL);
 	}
 
-	evaluate_state(server);
+	uccs_notify_state_change(server);
 
 	return SERVER(server);
 }

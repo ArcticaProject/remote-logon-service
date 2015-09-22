@@ -76,6 +76,7 @@ Server * uccs_server_new_from_keyfile (GKeyFile * keyfile, const gchar * name);
 void uccs_server_unlock (UccsServer * server, const gchar * address, const gchar * username, const gchar * password, gboolean allowcache, void (*callback) (UccsServer * server, gboolean unlocked, gpointer user_data), gpointer user_data);
 GVariant * uccs_server_get_servers (UccsServer * server, const gchar * address);
 const gchar *uccs_server_set_exec (UccsServer * server, const gchar * exec);
+void uccs_notify_state_change (UccsServer * server);
 
 G_END_DECLS
 
