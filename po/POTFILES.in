@@ -1,6 +1,6 @@
 [type: gettext/ini] data/remote-logon-service.conf.in
+src/crypt.c
 src/server.c
-src/remote-logon.c
 src/rdp-server.c
 src/citrix-server.c
 src/x2go-server.c
