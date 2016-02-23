@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[arctica-greeter.remote-logon-service]
+source_file = po/remote-logon-service.pot
+source_lang = en
+type = PO
+file_filter = po/<lang>.po
