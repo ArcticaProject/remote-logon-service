@@ -132,7 +132,7 @@ uccs_server_init (UccsServer *self)
 	self->session = NULL;
 
 	/* Need the soup session before the state changed */
-	self->session = soup_session_sync_new();
+	self->session = soup_session_new();
 
 	nm_state_changed(self->nm_client, NULL, self);
 	uccs_notify_state_change(self);
