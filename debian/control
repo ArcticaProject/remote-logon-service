@@ -25,7 +25,7 @@ Package: remote-logon-service
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-Recommends: thin-client-config-agent
+Recommends: remote-logon-config-agent
 Description: Service to track the remote servers to use
  A small service to take the various sources for the remote
  services and bring them into a simple DBus list.

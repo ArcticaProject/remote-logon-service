@@ -45,7 +45,7 @@ libservers_la_SOURCES = \
 	crypt.c \
 	crypt.h
 libservers_la_CFLAGS = \
-	-DUCCS_QUERY_TOOL="\"thin-client-config-agent\"" \
+	-DUCCS_QUERY_TOOL="\"remote-logon-config-agent\"" \
 	$(SERVICE_CFLAGS) \
 	$(COVERAGE_CFLAGS)
 libservers_la_LDFLAGS = \
