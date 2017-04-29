@@ -15,6 +15,7 @@ TESTS = \
 SERVER_XML_REPORT = server-test.xml
 server-tester: server-test Makefile.am
 	@echo "#!/bin/bash" > $@
+	@echo export DBUS_TEST_RUNNER=1 >> $@
 	@echo gtester --verbose -k -o $(SERVER_XML_REPORT) $(abs_builddir)/server-test >> $@
 	@chmod +x $@
 

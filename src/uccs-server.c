@@ -112,19 +112,23 @@ uccs_server_init (UccsServer *self)
 	/* Start as unavailable */
 	self->parent.state = SERVER_STATE_UNAVAILABLE;
 
-	if (global_client == NULL) {
-		global_client = nm_client_new();
+	if (g_strcmp0(g_getenv("DBUS_TEST_RUNNER"), "1")) {
 
-		if (global_client != NULL) {
-			g_object_add_weak_pointer(G_OBJECT(global_client), (gpointer *)&global_client);
-			self->nm_client = global_client;
+		if (global_client == NULL) {
+			global_client = nm_client_new();
+
+			if (global_client != NULL) {
+				g_object_add_weak_pointer(G_OBJECT(global_client), (gpointer *)&global_client);
+				self->nm_client = global_client;
+			}
+		} else {
+			self->nm_client = g_object_ref(global_client);
 		}
-	} else {
-		self->nm_client = g_object_ref(global_client);
-	}
 
-	if (self->nm_client != NULL) {
-		self->nm_signal = g_signal_connect(self->nm_client, "notify::" NM_CLIENT_STATE, G_CALLBACK(nm_state_changed), self);
+		if (self->nm_client != NULL) {
+			self->nm_signal = g_signal_connect(self->nm_client, "notify::" NM_CLIENT_STATE, G_CALLBACK(nm_state_changed), self);
+		}
+
 	}
 
 	self->verify_server = TRUE;
