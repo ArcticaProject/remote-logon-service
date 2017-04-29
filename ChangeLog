@@ -1,6 +1,35 @@
+2017-04-29 23:15:00 +0000 Mike Gabriel (4033e20)
+
+	* release 1.0.1.1 (HEAD -> master)
+
+2017-04-29 23:11:35 +0000 Mike Gabriel (ee2a35c)
+
+	* debian/control: Bump Standards: to 3.9.8. No changes needed.
+
+2017-04-29 23:07:55 +0000 Mike Gabriel (385e783)
+
+	* Avoid crash during test runs. Don't initialize new NMClient
+          instance during unit tests. (origin/master)
+
+2017-04-29 23:46:13 +0200 Mike Gabriel (9c4e4c0)
+
+	* debian/rules: Don't touch upstream ChangeLog.
+
+2017-04-29 23:45:37 +0200 Mike Gabriel (82b8f8a)
+
+	* debian/rules: Don't remove manually maintained upstream ChangeLog.
+
+2017-04-29 23:44:11 +0200 Mike Gabriel (a5d4b47)
+
+	* ChangeLog creation handled manually...
+
+2017-04-29 21:41:43 +0000 Mike Gabriel (a38d3b5)
+
+	* post-release fix-up of debian/changelog
+
 2017-04-29 22:36:32 +0200 Mike Gabriel (d0cd516)
 
-	* release 1.0.1.0 (HEAD -> master, tag: 1.0.1.0, origin/master)
+	* release 1.0.1.0 (tag: 1.0.1.0)
 
 2016-09-14 14:23:12 +0200 Mike Gabriel (98592ae)
 
