@@ -1,4 +1,4 @@
-AC_INIT(remote-logon-service, 1.0.0.1)
+AC_INIT(remote-logon-service, 1.0.1.0)
 
 AC_PREREQ(2.53)
 AM_INIT_AUTOMAKE([])
@@ -102,4 +102,3 @@ AC_SUBST(AM_CFLAGS, "-Wall -Werror")
 AC_SUBST(AM_CPPFLAGS, $AM_CFLAGS)
 
 AC_OUTPUT
-

@@ -1,0 +1,200 @@
+2017-04-29 22:36:32 +0200 Mike Gabriel (a5017f7)
+
+	* release 1.0.1.0 (HEAD -> master)
+
+2016-09-14 14:23:12 +0200 Mike Gabriel (98592ae)
+
+	* Use remote-logon-config-agent instead of thin-client-config-agent.
+          (origin/master)
+
+2016-08-26 11:57:57 +0000 Mike Gabriel (7777d20)
+
+	* uccs-server.c: Replace deprecated soup_session_sync_new() by
+          soup_session_new().
+
+2016-02-23 08:34:45 +0100 Mike Gabriel (ec74c02)
+
+	* po/POTFILES.in: Update to current list of available .c files.
+
+2016-02-23 08:34:18 +0100 Mike Gabriel (a82fa07)
+
+	* Transifex: Add .tx/config configuration file.
+
+2016-02-23 08:33:51 +0100 Mike Gabriel (c968593)
+
+	* po: Add helper script update-pot.sh.
+
+2016-02-19 11:09:39 +0100 Mike Gabriel (c4b7de2)
+
+	* README(.md): Improve README(.md), rename file (-> .md), maintain
+          README as symlink.
+
+2015-09-22 09:40:12 +0200 David Barth (71e55e0)
+
+	* ensure that the availability of a server gets signaled, even in the
+          absence of an exec line
+
+2015-09-19 13:22:31 +0200 Mike Gabriel (56462d6)
+
+	* debian/control: Update Homepage: and Vcs-*: fields. Remove all
+          Breaks:/Replaces: lines.
+
+2015-09-19 10:55:07 +0200 Mike Gabriel (e99bbfd)
+
+	* debian/rules: Fake a user's HOME directory while running tests.
+
+2015-09-19 09:39:09 +0200 Mike Gabriel (a436b0f)
+
+	* update debian/changelog
+
+2015-09-19 09:01:17 +0200 Mike Gabriel (231a745)
+
+	* Adapt creation of upstream ChangeLog to using Git, same for AUTHORS
+          file. Keep orginal authors in AUTHORS.Canonical.
+
+2015-09-19 08:51:33 +0200 Mike Gabriel (c371bc9)
+
+	* debian/copyright: Update copyright holders and years.
+
+2015-09-19 08:50:43 +0200 Mike Gabriel (72e5d85)
+
+	* Add ArcticaProject as copyright holders.
+
+2015-09-19 08:44:07 +0200 Mike Gabriel (7e5e097)
+
+	* debian/changelog: Wrap too-long-line.
+
+2015-09-19 08:42:43 +0200 Mike Gabriel (01e7d78)
+
+	* debian/rules: Fix missing call of dh_auto_clean in
+          override_dh_auto_clean.
+
+2015-09-18 22:15:09 +0200 Mike Gabriel (41c204c)
+
+	* fork remote-login-service as remote-logon-service
+
+2014-11-28 16:11:23 +0100 Mike Gabriel (567d358)
+
+	* remote-login-service.conf.in: No https for localhost connections.
+          (ubuntu)
+
+2014-11-28 16:10:08 +0100 Mike Gabriel (9952149)
+
+	* whitespace fix in configure.ac
+
+2014-11-12 05:26:30 +0100 Mike Gabriel (d326cda)
+
+	* debian/copyright: Fix upstream source URL.
+
+2014-11-03 13:04:35 +0100 Mike Gabriel (55aa7c0)
+
+	* remove cruft from current changelog
+
+2014-11-03 14:20:07 +0100 Mike Gabriel (ba2fc09)
+
+	* Remove dummy ChangeLog file after build if empty.
+
+2014-11-03 13:04:18 +0100 Mike Gabriel (6876758)
+
+	* Make sure we have an empty upstream ChangeLog file when building
+          from Git.
+
+2014-11-03 12:57:23 +0100 Mike Gabriel (2ce52cc)
+
+	* remote-login-service.conf.in: Add URLs for default X2Go Session
+          Broker installation.
+
+2014-11-03 12:56:41 +0100 Mike Gabriel (fcb994d)
+
+	* Update README file. Inform about RLS fork by X2Go.
+
+2014-11-03 12:55:53 +0100 Mike Gabriel (ee1668e)
+
+	* fix version number and project name
+
+2014-11-03 12:48:10 +0100 Mike Gabriel (eeefe7a)
+
+	* drop all patches, that we now applied to our forked RLS
+
+2014-11-03 12:47:16 +0100 Mike Gabriel (831b108)
+
+	* Apply 03_x2go+rls.patch. Provide support for X2Go remote logins.
+
+2014-11-03 12:46:27 +0100 Mike Gabriel (ecb6bd2)
+
+	* Apply 02_server-name.patch. Provide support for non-Canonical UCCS
+          servers.
+
+2014-11-03 12:45:31 +0100 Mike Gabriel (4739ebb)
+
+	* Apply patch glib-deprecated.diff. Provide support for old  GLib
+          versions.
+
+2014-11-03 12:41:08 +0100 Mike Gabriel (1261f34)
+
+	* Apply patch 01_clear_servers.patch.
+
+2014-11-03 12:38:41 +0100 Mike Gabriel (be5a910)
+
+	* debian/copyright: Add Upstream-Contract: field. Add myself as
+          copyright holder (in earlier commit).
+
+2014-11-03 12:37:11 +0100 Mike Gabriel (2e1a704)
+
+	* Bump Standards: to 3.9.6. No changes needed.
+
+2014-11-03 12:36:20 +0100 Mike Gabriel (4c83f8c)
+
+	* debian/source/format: Switch back to source format 1.0.
+
+2014-11-03 12:19:12 +0100 Mike Gabriel (4b921d8)
+
+	* fork rls as remote-login-service-x2go
+
+2014-11-03 12:08:32 +0100 Mike Gabriel (eb0fe46)
+
+	* upload to ppa:x2go/stable+ppa
+          (ubuntu/1.0.0-0ubuntu3+x2go2~0ubuntu14.04.1)
+
+2014-11-03 12:07:53 +0100 Mike Gabriel (a2a7c3a)
+
+	* Attempt (1) to fix FTBFS...
+
+2014-11-02 21:37:22 +0100 Mike Gabriel (0f96f0a)
+
+	* upload to ppa:x2go/stable+ppa (ubuntu/1.0.0+x2go1-0ubuntu3+x2go1)
+
+2014-11-02 21:36:19 +0100 Mike Gabriel (4591aa6)
+
+	* Merge tag 'upstream/1.0.0+x2go1'
+
+2014-11-02 21:36:12 +0100 Mike Gabriel (2883f8a)
+
+	* Imported Upstream version 1.0.0+x2go1 (tag: upstream/1.0.0+x2go1)
+
+2014-11-02 21:35:44 +0100 Mike Gabriel (6e20a0d)
+
+	* add required X2Go patches
+
+2014-11-02 21:35:32 +0100 Mike Gabriel (905fb5f)
+
+	* set package to UNRELEASED
+
+2014-11-02 21:31:43 +0100 Mike Gabriel (53f8a5f)
+
+	* Revert "upload to ppa:x2go/stable+ppa
+          (ubuntu/1.0.0-0ubuntu3+x2go1~0ubuntu14.04.1)"
+
+2014-11-02 20:45:23 +0100 Mike Gabriel (d8d094d)
+
+	* upload to ppa:x2go/stable+ppa
+          (ubuntu/1.0.0-0ubuntu3+x2go1~0ubuntu14.04.1)
+
+2013-02-26 10:40:57 +0100 Matthias Klose (b9ad4d7)
+
+	* Imported Debian patch 1.0.0-0ubuntu3 (tag: debian/1.0.0-0ubuntu3)
+
+2014-11-02 20:44:45 +0100 Mike Gabriel (fdc3950)
+
+	* Imported Upstream version 1.0.0 (tag: upstream/1.0.0)
+
