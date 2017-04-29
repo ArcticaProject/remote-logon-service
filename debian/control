@@ -16,7 +16,7 @@ Build-Depends: dbus-test-runner,
                libgtest-dev,
                python,
                python3,
-Standards-Version: 3.9.6
+Standards-Version: 3.9.8
 Homepage: http://arctica-project.org
 Vcs-Git: git://cgit.arctica-project.org/remote-logon-service.git
 Vcs-Browser: https://cgit.arctica-project.org/remote-logon-service.git/
