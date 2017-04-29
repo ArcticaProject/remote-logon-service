@@ -1,11 +1,10 @@
-2017-04-29 22:36:32 +0200 Mike Gabriel (a5017f7)
+2017-04-29 22:36:32 +0200 Mike Gabriel (d0cd516)
 
-	* release 1.0.1.0 (HEAD -> master)
+	* release 1.0.1.0 (HEAD -> master, tag: 1.0.1.0, origin/master)
 
 2016-09-14 14:23:12 +0200 Mike Gabriel (98592ae)
 
 	* Use remote-logon-config-agent instead of thin-client-config-agent.
-          (origin/master)
 
 2016-08-26 11:57:57 +0000 Mike Gabriel (7777d20)
 

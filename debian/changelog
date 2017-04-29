@@ -1,33 +1,10 @@
-remote-logon-service (1.0.0.1-0) UNRELEASED; urgency=medium
+remote-logon-service (1.0.1.0-0) UNRELEASED; urgency=medium
 
+  * Fork from Canonical's remote-login-service.
   * Rename src:package and bin:package: -> remote-logon-service.
 
-  * First forked/upstream release (1.0.0.1):
-    - Apply patch 01_clear_servers.patch.
-    - Apply patch glib-deprecated.diff. Provide support for old
-      GLib versions.
-    - Apply 02_server-name.patch. Provide support for non-Canonical
-      UCCS servers.
-    - Apply 03_x2go+rls.patch. Provide support for X2Go remote logins.
-    - Extend README file, inform about the RLS fork by X2Go.
-    - remote-login-service.conf.in: Add URLs for default X2Go Session Broker
-      installation.
-    - remote-login-service.conf.in: No https for localhost connections.
-  * debian/rules:
-    + Build using dh_autoreconf.
-    + Make sure we have an empty upstream ChangeLog file when building from Git.
-    + Remove dummy ChangeLog file after build if empty.
-    + Fix missing call of dh_auto_clean in override_dh_auto_clean.
-  * debian/copyright:
-    + Add Upstream-Contract: field. Add myself as copyright holder.
-    + Fix upstream source URL.
-    + Update copyright holders and years.
-  * debian/control:
-    + Add B-Ds: dh-autoreconf, libgtest-dev, python. Enable the testsuite at
-      build time.
-    + Bump Standards: to 3.9.6. No changes needed.
-  * debian/source/format:
-    + Switch back to source format 1.0.
+  * Upstream-provided Debian package for remote-logon-service.
+    See upstream ChangeLog for recent changes.
 
  -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Sun, 02 Nov 2014 21:36:41 +0100
 
