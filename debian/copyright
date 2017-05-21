@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: remote-logon-service
 Upstream-Contact: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
-Source: http://code.x2go.org/gitweb?p=remote-logon-service-x2go.git;a=summary
+Source: https://github.com/ArcticaProject/remote-logon-serivce
 
 Files: *
 Copyright: 2012, Canonical Ltd.
@@ -9,9 +9,14 @@ Copyright: 2012, Canonical Ltd.
            2015, The Arctica Project
 License: GPL-3
 
+Files: po/Makefile.in.in
+Copyright: 1995, 1996, 1997, Ulrich Drepper <drepper@gnu.ai.mit.edu>
+           2004-2008, Rodney Dawes <dobey.pwns@gmail.com>
+License: public-domain~po-Makefile
+
 Files: debian/*
 Copyright: 2012, Canonical Ltd.
-           2012-2015, Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
+           2012-2017, Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
 License: GPL-3
 
 License: GPL-3
@@ -29,3 +34,8 @@ License: GPL-3
  .
  On Debian systems, the complete text of the GNU General
  Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
+
+License: public-domain~po-Makefile
+ This file may be copied and used freely without restrictions.  It may
+ be used in projects which are not available under a GNU Public License,
+ but which still want to provide support for the GNU gettext functionality.

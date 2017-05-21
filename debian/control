@@ -3,7 +3,8 @@ Section: misc
 Priority: extra
 Maintainer: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
 Build-Depends: dbus-test-runner,
-               debhelper (>= 9),
+               debhelper (>= 10),
+               dpkg-dev (>= 1.16.1.1),
                intltool (>= 0.35.0), 
                libdbus-1-dev,
                libdbustest1-dev,
@@ -26,6 +27,11 @@ Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
 Recommends: remote-logon-config-agent
-Description: Service to track the remote servers to use
- A small service to take the various sources for the remote
- services and bring them into a simple DBus list.
+Description: DBus service for tracking available remote logon servers
+ The 'remote-logon-service' DBus service obtains its data from the Python
+ script 'remote-logon-config-agent'. The retrieved information is then
+ handed over to Arctica Greeter.
+ .
+ In Arctica Greeter, the logon information is presented to the user for
+ starting up remote desktop sessions on Arctica, X2Go or RDP / Citrix
+ servers.
