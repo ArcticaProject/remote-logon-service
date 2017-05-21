@@ -940,7 +940,7 @@ set_last_used_server (Server * server, const gchar * uri)
 				gchar *path = g_build_path ("/", dir_path, username_sha, NULL);
 				gboolean success = g_file_set_contents (path, enc_data, enc_data_length, NULL);
 				if (!success) {
-					g_warning("Failing writting cache data to '%s'.", path);
+					g_warning("Failed writing cache data to '%s'.", path);
 				}
 				g_free (username_sha);
 				g_free (path);
