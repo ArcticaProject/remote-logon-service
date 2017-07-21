@@ -1,0 +1,36 @@
+# Finnish translations for remote-logon-service package.
+# Copyright (C) 2017 THE remote-logon-service'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the remote-logon-service package.
+# Mike Gabriel <mike.gabriel@das-netzwerkteam.de>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: remote-logon-service 1.0.1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-21 16:29+0200\n"
+"PO-Revision-Date: 2017-07-21 16:28+0200\n"
+"Last-Translator: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>\n"
+"Language-Team: Finnish\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../data/remote-logon-service.conf.in.h:1
+msgid "Remote Logon"
+msgstr ""
+
+#: ../src/main.c:390
+msgid ""
+"Configuration file for the remote logon service.  Defaults to '/etc/remote-"
+"logon-service.conf'."
+msgstr ""
+
+#: ../src/main.c:390
+msgid "key_file"
+msgstr ""
+
+#: ../src/main.c:415
+msgid "- Determine the remote servers that can be logged into"
+msgstr ""
