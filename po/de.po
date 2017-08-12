@@ -8,29 +8,33 @@ msgstr ""
 "Project-Id-Version: remote-logon-service 1.0.1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-21 16:29+0200\n"
-"PO-Revision-Date: 2017-07-21 16:27+0200\n"
+"PO-Revision-Date: 2017-08-12 15:26+0000\n"
 "Last-Translator: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>\n"
-"Language-Team: German\n"
+"Language-Team: German <https://hosted.weblate.org/projects/arctica-framework"
+"/remote-logon-service/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.16\n"
 
 #: ../data/remote-logon-service.conf.in.h:1
 msgid "Remote Logon"
-msgstr ""
+msgstr "Remote Anmeldung"
 
 #: ../src/main.c:390
 msgid ""
 "Configuration file for the remote logon service.  Defaults to '/etc/remote-"
 "logon-service.conf'."
 msgstr ""
+"Konfigurationsdate für den Remote Logon Service. Standardmäßig auf '/etc"
+"/remote-logon-service.conf' gesetzt."
 
 #: ../src/main.c:390
 msgid "key_file"
-msgstr ""
+msgstr "key_file"
 
 #: ../src/main.c:415
 msgid "- Determine the remote servers that can be logged into"
-msgstr ""
+msgstr "- Ermittle entfernte Server, an denen man sich anmelden kann"
