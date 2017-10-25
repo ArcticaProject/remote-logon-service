@@ -333,7 +333,7 @@ verify_server (UccsServer * server)
 	}
 
 	SoupMessage * message = soup_message_new("HEAD", server->parent.uri);
-	soup_session_send_message(server->session, message, verify_server_cb, server);
+	soup_session_send(server->session, message, verify_server_cb, server);
 	g_debug("Getting HEAD from: %s", server->parent.uri);
 
 	return;
