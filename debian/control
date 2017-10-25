@@ -26,7 +26,7 @@ Package: remote-logon-service
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-Recommends: remote-logon-config-agent
+         remote-logon-config-agent,
 Description: DBus service for tracking available remote logon servers
  The 'remote-logon-service' DBus service obtains its data from the Python
  script 'remote-logon-config-agent'. The retrieved information is then
