@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: remote-logon-service 1.0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-21 16:29+0200\n"
-"PO-Revision-Date: 2017-09-30 19:48+0000\n"
-"Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
+"PO-Revision-Date: 2018-01-24 12:31+0000\n"
+"Last-Translator: Sebastian Rasmussen <sebras@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/arctica-framework"
 "/remote-logon-service/sv/>\n"
 "Language: sv\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.17-dev\n"
+"X-Generator: Weblate 2.19-dev\n"
 
 #: ../data/remote-logon-service.conf.in.h:1
 msgid "Remote Logon"
@@ -33,7 +33,7 @@ msgstr ""
 
 #: ../src/main.c:390
 msgid "key_file"
-msgstr ""
+msgstr "key_file"
 
 #: ../src/main.c:415
 msgid "- Determine the remote servers that can be logged into"
