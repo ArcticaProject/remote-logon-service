@@ -1,6 +1,6 @@
 Source: remote-logon-service
 Section: misc
-Priority: extra
+Priority: optional
 Maintainer: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
 Build-Depends: dbus-test-runner,
                debhelper (>= 9),
@@ -17,16 +17,16 @@ Build-Depends: dbus-test-runner,
                libgtest-dev,
                python,
                python3,
-Standards-Version: 3.9.8
+Standards-Version: 4.1.3
 Homepage: http://arctica-project.org
 Vcs-Git: git://cgit.arctica-project.org/remote-logon-service.git
 Vcs-Browser: https://cgit.arctica-project.org/remote-logon-service.git/
 
 Package: remote-logon-service
-Architecture: any
+Architecture: linux-any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-         remote-logon-config-agent,
+Recommends: remote-logon-config-agent,
 Description: DBus service for tracking available remote logon servers
  The 'remote-logon-service' DBus service obtains its data from the Python
  script 'remote-logon-config-agent'. The retrieved information is then
