@@ -28,10 +28,10 @@ setup_cipher (const gchar * password)
 {
 	gcry_error_t     gcryError;
 	gcry_cipher_hd_t gcryHandle;
-	
+
 	const size_t keyLength = gcry_cipher_get_algo_keylen(GCRY_CIPHER_AES);
 	const size_t blkLength = gcry_cipher_get_algo_blklen(GCRY_CIPHER_AES);
-	
+
 	// We are assuming keyLength and blkLength are the same, check it
 	if (keyLength != blkLength)
 		return NULL;
@@ -42,7 +42,7 @@ setup_cipher (const gchar * password)
 	size_t i;
 	for (i = passwordLength; i < blkLength; ++i)
 		aesSymKey[i] = 0;
-	
+
 	gcryError = gcry_cipher_open(&gcryHandle, GCRY_CIPHER_AES, GCRY_CIPHER_MODE_CBC, 0);
 	if (gcryError) {
 		g_warning("gcry_cipher_open failed: %s/%s\n", gcry_strsource(gcryError), gcry_strerror(gcryError));
@@ -80,12 +80,12 @@ do_aes_encrypt(const gchar *origBuffer, const gchar * password, size_t *outBuffe
 {
 	gcry_error_t     gcryError;
 	gcry_cipher_hd_t gcryHandle;
-	
+
 	gcryHandle = setup_cipher (password);
 	if (gcryHandle == NULL) {
 		return NULL;
 	}
-	
+
 	const size_t blkLength = gcry_cipher_get_algo_blklen(GCRY_CIPHER_AES);
 	const size_t origBufferLength = strlen(origBuffer);
 	const size_t bufferLength = ceil((double)origBufferLength / blkLength) * blkLength;
@@ -94,7 +94,7 @@ do_aes_encrypt(const gchar *origBuffer, const gchar * password, size_t *outBuffe
 	int i;
 	for (i = origBufferLength; i < bufferLength; ++i)
 		buffer[i] = 0;
-	
+
 	char * encBuffer = malloc(bufferLength);
 	size_t lengthDone = 0;
 	while (lengthDone < bufferLength) {
@@ -107,9 +107,9 @@ do_aes_encrypt(const gchar *origBuffer, const gchar * password, size_t *outBuffe
 		}
 		lengthDone += blkLength;
 	}
-	
+
 	gcry_cipher_close(gcryHandle);
-	
+
 	*outBufferLength = bufferLength;
 	return encBuffer;
 }
@@ -127,13 +127,13 @@ do_aes_decrypt(const gchar *encBuffer, const gchar * password, const size_t encB
 {
 	gcry_error_t     gcryError;
 	gcry_cipher_hd_t gcryHandle;
-	
+
 	gcryHandle = setup_cipher (password);
 	if (gcryHandle == NULL) {
 		return NULL;
 	}
-	
-	const size_t blkLength = gcry_cipher_get_algo_blklen(GCRY_CIPHER_AES128);	
+
+	const size_t blkLength = gcry_cipher_get_algo_blklen(GCRY_CIPHER_AES128);
 	const size_t bufferLength = encBufferLength;
 	char * outBuffer = malloc(bufferLength);
 	size_t lengthDone = 0;
@@ -146,7 +146,7 @@ do_aes_decrypt(const gchar *encBuffer, const gchar * password, const size_t encB
 		}
 		lengthDone += blkLength;
 	}
-	
+
 	gcry_cipher_close(gcryHandle);
 	char *result = g_strndup(outBuffer, bufferLength);
 	free(outBuffer);

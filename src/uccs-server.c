@@ -542,7 +542,7 @@ parse_json (UccsServer * server, GInputStream * json)
 			g_warning("Malformed 'RemoteDesktopServer' entry.  Not an array but a: %s", json_node_type_name(rds_node));
 			passed = FALSE;
 		}
-		
+
 		if (json_object_has_member(root_object, "DefaultServer")) {
 			JsonNode * ds_node = json_object_get_member(root_object, "DefaultServer");
 			if (JSON_NODE_TYPE(ds_node) == JSON_NODE_VALUE && json_node_get_value_type(ds_node) == G_TYPE_STRING) {
@@ -551,7 +551,7 @@ parse_json (UccsServer * server, GInputStream * json)
 					GList * lserver;
 					for (lserver = server->subservers; lserver != NULL; lserver = g_list_next(lserver)) {
 						Server * serv = SERVER(lserver->data);
-						
+
 						if (g_strcmp0(serv->name, default_server_name) == 0) {
 							serv->last_used = TRUE;
 							break;
@@ -803,7 +803,7 @@ uccs_server_get_servers (UccsServer * server, const gchar * address)
 		g_warning("Address '%s' is not authorized", address);
 		return null_server_array();
 	}
-	
+
 	gchar *last_used_server_name = NULL;
 	if (server->username != NULL && server->password != NULL) {
 		gchar *username_sha = g_compute_checksum_for_string (G_CHECKSUM_SHA256, server->username, -1);
@@ -830,7 +830,7 @@ uccs_server_get_servers (UccsServer * server, const gchar * address)
 	g_variant_builder_init(&array, G_VARIANT_TYPE_ARRAY);
 	GList * lserver;
 	gint servercnt = 0;
-	
+
 	Server * last_used_server = NULL;
 	if (last_used_server_name != NULL) {
 		for (lserver = server->subservers; last_used_server == NULL && lserver != NULL; lserver = g_list_next(lserver)) {
@@ -853,7 +853,7 @@ uccs_server_get_servers (UccsServer * server, const gchar * address)
 		if (serv->state != SERVER_STATE_ALLGOOD) {
 			continue;
 		}
-		
+
 		if (last_used_server != NULL)
 			serv->last_used = last_used_server == serv;
 
@@ -916,10 +916,10 @@ static void
 set_last_used_server (Server * server, const gchar * uri)
 {
 	Server * subserver = server_find_uri(server, uri);
-	
+
 	if (subserver != NULL) {
 		subserver->last_used = TRUE;
-		
+
 		/* Write to disk */
 		if (UCCS_SERVER(server)->username != NULL && UCCS_SERVER(server)->password) {
 			GKeyFile * key_file = g_key_file_new();
@@ -927,7 +927,7 @@ set_last_used_server (Server * server, const gchar * uri)
 			gsize data_length;
 			gchar *data = g_key_file_to_data (key_file, &data_length, NULL);
 			g_key_file_free (key_file);
-			
+
 			size_t enc_data_length;
 			gchar *enc_data = do_aes_encrypt(data, UCCS_SERVER(server)->password, &enc_data_length);
 			g_free (data);

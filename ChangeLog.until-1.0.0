@@ -7,7 +7,7 @@
 2012-09-20  Albert Astals Cid  <albert.astals@canonical.com>
 
 	Handle the SetLastUsedServer calls
-	
+
 	The data is saved in a file that is encrypted with the password and whose name is the hash of the username to provide as much privacy/security possible
 
 2012-09-20  Albert Astals  <albert.astals@canonical.com>
@@ -97,7 +97,7 @@
 2012-09-14  Albert Astals  <albert.astals@canonical.com>
 
 	Change the if line so the previously added test passes
-	
+
 	Not sure i fully understand what this line is trying to do
 
 2012-09-14  Albert Astals  <albert.astals@canonical.com>
@@ -123,7 +123,7 @@
 2012-09-14  Albert Astals  <albert.astals@canonical.com>
 
 	Set AM_CPPFLAGS to be AM_CFLAGS too
-	
+
 	Since it seems we are compiling in CPP mode
 
 2012-09-14  Ted Gould  <ted@gould.cx>
@@ -205,7 +205,7 @@
 2012-09-13  Albert Astals  <albert.astals@canonical.com>
 
 	Add a test that fails regarding default/last_used server
-	
+
 	Make the default property of the servers map to the last_used on in rls speak
 
 2012-09-12  Ted Gould  <ted@gould.cx>
@@ -246,7 +246,7 @@
 
 2012-09-11  Ted Gould  <ted@gould.cx>
 
-	Gettin' some soup! 
+	Gettin' some soup!
 
 2012-09-11  Ted Gould  <ted@gould.cx>
 
@@ -846,7 +846,7 @@
 
 2012-08-10  Ted Gould  <ted@gould.cx>
 
-	Adding a couple fun little calls to get this party started! 
+	Adding a couple fun little calls to get this party started!
 
 2012-08-10  Ted Gould  <ted@gould.cx>
 

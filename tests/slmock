@@ -43,7 +43,7 @@ class AdditionalManagementServer():
         self.Name = name
 
 class TerminalServer():
-    def __init__(self, url, name, protocol, domainRequired = True, 
+    def __init__(self, url, name, protocol, domainRequired = True,
         username = None, password = None):
         self.URL = url
         self.Name = name
@@ -68,7 +68,7 @@ def convert_to_builtin_type(obj):
 
 def freerdp(email):
     ms = ManagementServer("http://tc.arctica-project.org", "Landscape")
-    ts1 = TerminalServer("23.21.151.133", "FreeRDP US", "freerdp", False, 
+    ts1 = TerminalServer("23.21.151.133", "FreeRDP US", "freerdp", False,
         "Administrator")
     ts2 = TerminalServer("46.137.222.181", "FreeRDP Asia", "freerdp", False,
         "Administrator")
@@ -82,7 +82,7 @@ def freerdp(email):
 
 def x2go(email):
     ms = ManagementServer("http://x2go.intern", "X2GoSessionBroker")
-    ts1 = TerminalServer("10.0.2.11", "X2Go Server 1", "x2go", False, 
+    ts1 = TerminalServer("10.0.2.11", "X2Go Server 1", "x2go", False,
         "foo")
     ts2 = TerminalServer("10.0.2.12", "X2Go Server 2", "x2go", False,
         "bar")
@@ -102,7 +102,7 @@ def error(email):
 
 def citrix(email):
     ms = ManagementServer("http://tc.arctica-project.org", "Landscape")
-    ts1 = TerminalServer("107.21.17.35", "Citrix USA", "ICA", True, 
+    ts1 = TerminalServer("107.21.17.35", "Citrix USA", "ICA", True,
         "useradmin1")
     ts2 = TerminalServer("107.21.17.35", "Citrix 2", "ICA", True,
         "useradmin2")
@@ -122,7 +122,7 @@ def citrix(email):
 
 def vmware(email):
     ms = ManagementServer("http://tc.arctica-project.org", "Landscape")
-    ts = TerminalServer("https://10.193.37.140", "VMWare-View Lexington", 
+    ts = TerminalServer("https://10.193.37.140", "VMWare-View Lexington",
         "vmware", True, "Administrator")
     ts.add_domain("VMWARE")
     ms.add_terminal_server(ts)
@@ -174,12 +174,12 @@ def big(email):
     ms = ManagementServer("http://tc.arctica-project.org", "Landscape")
 
     ts1 = TerminalServer("107.21.17.35", "XenServer", "ICA")
-    ts2 = TerminalServer("http://1.2.3.4", "Citrix2", "ICA", True, 
+    ts2 = TerminalServer("http://1.2.3.4", "Citrix2", "ICA", True,
         "fakeuser", "fakepassword")
-    ts3 = TerminalServer("10.21.17.35", "Accenture", "freerdp", True, 
+    ts3 = TerminalServer("10.21.17.35", "Accenture", "freerdp", True,
         "fakeuser")
     ts4 = TerminalServer("https://4.5.6.7", "Accenture 2", "freerdp", False)
-    ts5 = TerminalServer("5.21.17.35", "VmWare Cloud", "vmware", False, 
+    ts5 = TerminalServer("5.21.17.35", "VmWare Cloud", "vmware", False,
         "fakeuser", "fakepassword")
     ts6 = TerminalServer("http://8.9.10.11", "Canonicloud", "vmware", True)
 

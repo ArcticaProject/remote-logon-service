@@ -34,7 +34,7 @@ remote-login-service (1.0.0-0ubuntu1) quantal; urgency=low
 
   * New upstream release.
     * Support caching the recently used server
-  * debian/control: Add build dep on libgcrypt11-dev 
+  * debian/control: Add build dep on libgcrypt11-dev
 
  -- Ted Gould <ted@ubuntu.com>  Thu, 20 Sep 2012 23:55:05 -0500
 

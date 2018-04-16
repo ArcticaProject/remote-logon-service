@@ -342,11 +342,11 @@ handle_set_last_used_server (RemoteLogon * rl, GDBusMethodInvocation * invocatio
 	child = g_variant_get_child_value(params, 0);
 	uccsUri = g_variant_get_string(child, NULL);
 	g_variant_unref(child); /* fine as we know params is still ref'd */
-	
+
 	child = g_variant_get_child_value(params, 1);
 	serverUri = g_variant_get_string(child, NULL);
 	g_variant_unref(child); /* fine as we know params is still ref'd */
-	
+
 	GList * lserver = NULL;
 	Server * server = NULL;
 	for (lserver = config_file_servers; lserver != NULL; lserver = g_list_next(lserver)) {
@@ -364,13 +364,13 @@ handle_set_last_used_server (RemoteLogon * rl, GDBusMethodInvocation * invocatio
 			break;
 		}
 	}
-	
+
 	if (server != NULL) {
 		server_set_last_used_server (server, serverUri);
 	}
-	
+
 	g_dbus_method_invocation_return_value(invocation, NULL);
-	
+
 	return TRUE;
 }
 
@@ -404,7 +404,7 @@ main (int argc, char * argv[])
 #endif
 
 	/* Setup i18n */
-	setlocale (LC_ALL, ""); 
+	setlocale (LC_ALL, "");
 	bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
 	textdomain (GETTEXT_PACKAGE);
 

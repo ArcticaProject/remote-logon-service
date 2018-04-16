@@ -515,7 +515,7 @@ test_setlastused_basic (void)
 
 	GDBusConnection * session = g_bus_get_sync(G_BUS_TYPE_SESSION, NULL, NULL);
 	g_dbus_connection_set_exit_on_close(session, FALSE);
-	
+
 	g_assert(slmock_check_login(session, &slmock_table[1], TRUE));
 
 	GError * error = NULL;
@@ -540,13 +540,13 @@ test_setlastused_basic (void)
 	g_assert(retval != NULL);
 	g_assert(g_variant_n_children(retval) == 0);
 	g_variant_unref(retval);
-	
+
 	g_assert(slmock_check_login(session, &slmock_table[3], FALSE));
 
 	g_object_unref(session);
 	g_object_unref(rls);
 	g_object_unref(service);
-	
+
 	return;
 }
 

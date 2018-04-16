@@ -16,16 +16,16 @@ clean-gcno:
 clean-gcda:
 	@echo Removing old coverage results
 	-find -name '*.gcda' -print | xargs -r rm
-  
+
 coverage-html: clean-gcda
 	-$(MAKE) $(AM_MAKEFLAGS) -k check
 	$(MAKE) $(AM_MAKEFLAGS) generate-coverage-html
-  
+
 generate-coverage-html:
 	@echo Collecting coverage data
 	$(LCOV) --directory $(top_builddir) --capture --output-file coverage.info --no-checksum --compat-libtool
 	LANG=C $(GENHTML) --prefix $(top_builddir) --output-directory coveragereport --title "Code Coverage" --legend --show-details coverage.info
-  
+
 clean-coverage-html: clean-gcda
 	-$(LCOV) --directory $(top_builddir) -z
 	-rm -rf coverage.info coveragereport
@@ -35,11 +35,11 @@ if HAVE_GCOVR
 coverage-gcovr: clean-gcda
 	-$(MAKE) $(AM_MAKEFLAGS) -k check
 	$(MAKE) $(AM_MAKEFLAGS) generate-coverage-gcovr
-	
+
 generate-coverage-gcovr:
 	@echo Generating coverage GCOVR report
 	$(GCOVR) -x -r $(top_builddir) -o $(top_builddir)/coverage.xml
-	
+
 clean-coverage-gcovr: clean-gcda
 	-rm -rf $(top_builddir)/coverage.xml
 
