@@ -25,6 +25,8 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 
+#include <gcrypt.h>
+
 /* NOTE: Required to build without optimizations */
 #include <locale.h>
 
@@ -451,6 +453,12 @@ main (int argc, char * argv[])
 
 	/* Parse config file */
 	find_config_file(config, cmnd_line_config, skel);
+
+	if(!gcry_check_version(NULL)) {
+		return -1;
+	}
+	gcry_control(GCRYCTL_DISABLE_SECMEM, 0);
+	gcry_control(GCRYCTL_INITIALIZATION_FINISHED, 0);
 
 	/* Loop forever */
 	g_main_loop_run(mainloop);
