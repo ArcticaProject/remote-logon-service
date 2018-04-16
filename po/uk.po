@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: remote-logon-service 1.0.1.1\n"
+"Project-Id-Version: remote-logon-service 1.0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-21 16:29+0200\n"
 "PO-Revision-Date: 2017-08-19 09:08+0000\n"

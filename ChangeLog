@@ -1,6 +1,127 @@
-2017-04-29 23:15:00 +0000 Mike Gabriel (4033e20)
+2018-04-16 11:51:00 +0200 Mike Gabriel (bb85ace)
 
-	* release 1.0.1.1 (HEAD -> master)
+	* release 1.0.2.0 (HEAD -> master, tag: 1.0.2.0)
+
+2018-04-16 11:47:55 +0200 Mike Gabriel (6e61c30)
+
+	* White-space clean-up at EOLs.
+
+2018-04-16 11:45:39 +0200 Mike Gabriel (dc1016e)
+
+	* Adopt changes from official Debian packaging.
+
+2018-04-16 11:14:43 +0200 Mike Gabriel (c28749e)
+
+	* Properly initialize Libgcrypt.
+
+2018-04-16 11:04:02 +0200 Mike Gabriel (e122428)
+
+	* data/remote-logon-service.conf.in: Can't localize the name field.
+          Not supported by parser.
+
+2018-04-16 11:01:11 +0200 Mike Gabriel (29cfcec)
+
+	* Port to libnm (from libnm-glib).
+
+2017-10-07 20:21:12 +0000 Kristjan Räts (660d57b)
+
+	* Translated using Weblate (Estonian)
+
+2017-09-29 18:09:46 +0000 Anders Jonsson (798adaa)
+
+	* Translated using Weblate (Swedish)
+
+2017-09-27 17:21:11 +0000 Isaac Larsen (c02140d)
+
+	* Translated using Weblate (Norwegian Bokmål)
+
+2017-09-04 15:15:05 +0000 Gaman Gabriel (325886e)
+
+	* Translated using Weblate (Romanian)
+
+2017-08-29 11:34:48 +0000 Jan Poulsen (b01443a)
+
+	* Translated using Weblate (Danish)
+
+2017-08-20 00:49:08 +0000 Arturo La Spada (7913e18)
+
+	* Translated using Weblate (Italian)
+
+2017-08-19 09:06:33 +0000 Володимир Бриняк (df68ce5)
+
+	* Translated using Weblate (Ukrainian)
+
+2017-08-15 21:43:51 +0000 Viktar Vauchkevich (ae3b855)
+
+	* Translated using Weblate (Belarusian)
+
+2017-08-12 15:25:56 +0000 Mike Gabriel (c34bbfc)
+
+	* Translated using Weblate (German)
+
+2017-11-29 13:39:06 +0100 Mike Gabriel (3e641e2)
+
+	* update-po(t).sh: Update to some latest version (as used in other
+          projects, too).
+
+2017-10-25 22:03:22 +0200 Mike Gabriel (0e1e16b)
+
+	* src/uccs-server.c: Revert back to soup_session_queue_message().
+          Noting that the behaviour has changed compared to the same
+          function from SoupSessionSync (the request is run in the
+          MainLoop thread rather than in a separate thread).
+
+2017-10-25 21:31:24 +0200 Mike Gabriel (807c22e)
+
+	* Fix for previous commit.
+
+2017-10-25 21:22:38 +0200 Mike Gabriel (7c6dc20)
+
+	* src/uccs-server.c: Use soup synchronously.
+
+2017-10-25 21:11:16 +0200 Mike Gabriel (7c499da)
+
+	* Test-wise revert "uccs-server.c: Replace deprecated
+          soup_session_sync_new() by soup_session_new()."
+
+2017-10-25 19:59:31 +0200 Mike Gabriel (366e6b4)
+
+	* debian/control: Promote remote-logon-config-agent from Recommends:
+          to Depends:. If the script is not present, RLS will fail.
+
+2017-07-21 16:30:22 +0200 Mike Gabriel (528df45)
+
+	* po/: Generate .po files from LINGUAS file via msginit.
+
+2017-07-21 16:27:27 +0200 Mike Gabriel (8286bf0)
+
+	* po/: Add LINGUAS file.
+
+2017-07-21 16:27:00 +0200 Mike Gabriel (6598b72)
+
+	* update-po.sh: Add simple script to update po/*.po files.
+
+2017-07-21 16:26:46 +0200 Mike Gabriel (18148c2)
+
+	* po/remote-logon-service.pot: Create file.
+
+2017-05-21 22:50:58 +0200 Mike Gabriel (16cd2d5)
+
+	* debian/{control,compat}: Revert to DH level 9, so that we continue
+          Debian 9 support.
+
+2017-05-21 22:21:02 +0200 Mike Gabriel (0b09776)
+
+	* debian/*: Adopt various packaging changes from official Debian
+          package.
+
+2017-05-21 22:17:34 +0200 Mike Gabriel (73b0093)
+
+	* src/uccs-server.c: Fix g_warning() message.
+
+2017-04-29 23:15:00 +0000 Mike Gabriel (48e91e4)
+
+	* release 1.0.1.1 (tag: 1.0.1.1)
 
 2017-04-29 23:11:35 +0000 Mike Gabriel (ee2a35c)
 
@@ -9,7 +130,7 @@
 2017-04-29 23:07:55 +0000 Mike Gabriel (385e783)
 
 	* Avoid crash during test runs. Don't initialize new NMClient
-          instance during unit tests. (origin/master)
+          instance during unit tests.
 
 2017-04-29 23:46:13 +0200 Mike Gabriel (9c4e4c0)
 
@@ -104,7 +225,6 @@
 2014-11-28 16:11:23 +0100 Mike Gabriel (567d358)
 
 	* remote-login-service.conf.in: No https for localhost connections.
-          (ubuntu)
 
 2014-11-28 16:10:08 +0100 Mike Gabriel (9952149)
 
