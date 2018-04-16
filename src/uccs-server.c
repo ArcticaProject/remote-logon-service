@@ -115,7 +115,7 @@ uccs_server_init (UccsServer *self)
 	if (g_strcmp0(g_getenv("DBUS_TEST_RUNNER"), "1")) {
 
 		if (global_client == NULL) {
-			global_client = nm_client_new();
+			global_client = nm_client_new(NULL, NULL);
 
 			if (global_client != NULL) {
 				g_object_add_weak_pointer(G_OBJECT(global_client), (gpointer *)&global_client);
@@ -346,7 +346,7 @@ nm_state_changed (NMClient *client, const GParamSpec *pspec, gpointer user_data)
 	g_return_if_fail(IS_UCCS_SERVER(user_data));
 	UccsServer * server = UCCS_SERVER(user_data);
 
-	if (server->nm_client == NULL || !nm_client_get_manager_running(server->nm_client)) {
+	if (server->nm_client == NULL || !nm_client_get_nm_running(server->nm_client)) {
 		server->last_network = NM_STATE_DISCONNECTED;
 	} else {
 		server->last_network = nm_client_get_state(server->nm_client);

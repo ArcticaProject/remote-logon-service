@@ -22,7 +22,7 @@
 #define __UCCS_SERVER_H__
 
 #include <glib-object.h>
-#include <libnm-glib/nm-client.h>
+#include <libnm/NetworkManager.h>
 #include <libsoup/soup.h>
 #include "server.h"
 

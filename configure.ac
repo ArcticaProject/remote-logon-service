@@ -23,7 +23,7 @@ AC_CONFIG_FILES([
 	tests/Makefile
 ])
 
-PKG_CHECK_MODULES(SERVICE, glib-2.0 gio-2.0 gio-unix-2.0 json-glib-1.0 libnm-glib libsoup-2.4)
+PKG_CHECK_MODULES(SERVICE, glib-2.0 gio-2.0 gio-unix-2.0 json-glib-1.0 libnm libsoup-2.4)
 PKG_CHECK_MODULES(TEST, dbustest-1)
 
 AC_CHECK_LIB(gcrypt, gcry_cipher_get_algo_keylen, GCRYPT_LIBS="-lgcrypt")
