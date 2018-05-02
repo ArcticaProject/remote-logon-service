@@ -42,7 +42,7 @@ enum {
 
 G_DEFINE_TYPE (Server, server, G_TYPE_OBJECT);
 
-static guint signals[LAST_SIGNAL] = { 0 };
+:wqtatic guint signals[LAST_SIGNAL] = { 0 };
 
 static void
 server_class_init (ServerClass *klass)
@@ -187,7 +187,7 @@ server_get_variant (Server * server)
 		if (IS_CITRIX_SERVER(server)) {
 			g_variant_builder_add_value(&tuple, g_variant_new_string("ica"));
 		} else if (IS_RDP_SERVER(server)) {
-			g_variant_builder_add_value(&tuple, g_variant_new_string("freerdp"));
+			g_variant_builder_add_value(&tuple, g_variant_new_string("rdp"));
 		} else if (IS_UCCS_SERVER(server)) {
 			g_variant_builder_add_value(&tuple, g_variant_new_string("uccs"));
 		} else if (IS_X2GO_SERVER(server)) {
