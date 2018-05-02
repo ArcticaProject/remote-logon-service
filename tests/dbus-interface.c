@@ -30,33 +30,33 @@ slmock_server_t citrix_server_table[] = {
 	{NULL, NULL, NULL}
 };
 
-slmock_server_t freerdp_server_table[] = {
-	{"FreeRDP US",    "23.21.151.133",  "freerdp", TRUE, "Administrator", "", ""},
-	{"FreeRDP Asia",  "46.137.222.181", "freerdp", FALSE, "Administrator", "", ""},
-	{"FreeRDP UK",    "46.137.189.194", "freerdp", FALSE, "Administrator", "", ""},
+slmock_server_t freerdp2_server_table[] = {
+	{"FreeRDP US",    "23.21.151.133",  "freerdp2", TRUE, "Administrator", "", ""},
+	{"FreeRDP Asia",  "46.137.222.181", "freerdp2", FALSE, "Administrator", "", ""},
+	{"FreeRDP UK",    "46.137.189.194", "freerdp2", FALSE, "Administrator", "", ""},
 	{NULL, NULL, NULL}
 };
 
-slmock_server_t freerdp_server_table_after_set_last_used[] = {
-	{"FreeRDP US",    "23.21.151.133",  "freerdp", FALSE, "Administrator", "", ""},
-	{"FreeRDP Asia",  "46.137.222.181", "freerdp", TRUE, "Administrator", "", ""},
-	{"FreeRDP UK",    "46.137.189.194", "freerdp", FALSE, "Administrator", "", ""},
+slmock_server_t freerdp2_server_table_after_set_last_used[] = {
+	{"FreeRDP US",    "23.21.151.133",  "freerdp2", FALSE, "Administrator", "", ""},
+	{"FreeRDP Asia",  "46.137.222.181", "freerdp2", TRUE, "Administrator", "", ""},
+	{"FreeRDP UK",    "46.137.189.194", "freerdp2", FALSE, "Administrator", "", ""},
 	{NULL, NULL, NULL}
 };
 
 slmock_server_t big_server_table[] = {
 	{"XenServer",    "107.21.17.35",    "ica",     FALSE, "",         "",             "ASIA"},
 	{"Citrix2",      "http://1.2.3.4",  "ica",     FALSE, "fakeuser", "fakepassword", "DOMAIN1"},
-	{"Accenture",    "10.21.17.35",     "freerdp", FALSE, "fakeuser", "",             "EUROPE"},
-	{"Accenture 2",  "https://4.5.6.7", "freerdp", TRUE, "",         "",             "domain2"},
+	{"Accenture",    "10.21.17.35",     "freerdp2", FALSE, "fakeuser", "",             "EUROPE"},
+	{"Accenture 2",  "https://4.5.6.7", "freerdp2", TRUE, "",         "",             "domain2"},
 	{NULL, NULL, NULL}
 };
 
 slmock_table_t slmock_table[] = {
 	{"c", "c", citrix_server_table},
-	{"f", "f", freerdp_server_table},
+	{"f", "f", freerdp2_server_table},
 	{"b", "b", big_server_table},
-	{"f", "f", freerdp_server_table_after_set_last_used}
+	{"f", "f", freerdp2_server_table_after_set_last_used}
 };
 
 static gboolean
@@ -524,7 +524,7 @@ test_setlastused_basic (void)
 	                                                "/org/ArcticaProject/RemoteLogon",
 	                                                "org.ArcticaProject.RemoteLogon",
 	                                                "SetLastUsedServer",
-	                                                g_variant_new("(ss)", "Landscape", freerdp_server_table[1].uri), /* params */
+	                                                g_variant_new("(ss)", "Landscape", freerdp2_server_table[1].uri), /* params */
 	                                                NULL, /* ret type */
 	                                                G_DBUS_CALL_FLAGS_NONE,
 	                                                -1,
@@ -558,7 +558,7 @@ test_dbus_suite (void)
 	g_test_add_func ("/dbus/interface/GetServers/None",   test_getservers_none);
 	g_test_add_func ("/dbus/interface/GetServers/UCCS",   test_getservers_uccs);
 	g_test_add_data_func ("/dbus/interface/GetServers/SLMock/citrix",  &slmock_table[0], test_getservers_slmock);
-	g_test_add_data_func ("/dbus/interface/GetServers/SLMock/freerdp", &slmock_table[1], test_getservers_slmock);
+	g_test_add_data_func ("/dbus/interface/GetServers/SLMock/freerdp2", &slmock_table[1], test_getservers_slmock);
 	g_test_add_data_func ("/dbus/interface/GetServers/SLMock/big",     &slmock_table[2], test_getservers_slmock);
 	g_test_add_func ("/dbus/interface/GetServers/SLMock/none",   test_getservers_slmock_none);
 	g_test_add_func ("/dbus/interface/GetServers/SLMock/two",   test_getservers_slmock_two);

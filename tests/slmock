@@ -66,13 +66,13 @@ def convert_to_builtin_type(obj):
     d.update(obj.__dict__)
     return d
 
-def freerdp(email):
+def freerdp2(email):
     ms = ManagementServer("http://tc.arctica-project.org", "Landscape")
-    ts1 = TerminalServer("23.21.151.133", "FreeRDP US", "freerdp", False,
+    ts1 = TerminalServer("23.21.151.133", "FreeRDP US", "freerdp2", False,
         "Administrator")
-    ts2 = TerminalServer("46.137.222.181", "FreeRDP Asia", "freerdp", False,
+    ts2 = TerminalServer("46.137.222.181", "FreeRDP Asia", "freerdp2", False,
         "Administrator")
-    ts3 = TerminalServer("46.137.189.194", "FreeRDP UK", "freerdp", False,
+    ts3 = TerminalServer("46.137.189.194", "FreeRDP UK", "freerdp2", False,
         "Administrator")
     ms.add_terminal_server(ts1)
     ms.add_terminal_server(ts2)
@@ -176,9 +176,9 @@ def big(email):
     ts1 = TerminalServer("107.21.17.35", "XenServer", "ICA")
     ts2 = TerminalServer("http://1.2.3.4", "Citrix2", "ICA", True,
         "fakeuser", "fakepassword")
-    ts3 = TerminalServer("10.21.17.35", "Accenture", "freerdp", True,
+    ts3 = TerminalServer("10.21.17.35", "Accenture", "freerdp2", True,
         "fakeuser")
-    ts4 = TerminalServer("https://4.5.6.7", "Accenture 2", "freerdp", False)
+    ts4 = TerminalServer("https://4.5.6.7", "Accenture 2", "freerdp2", False)
     ts5 = TerminalServer("5.21.17.35", "VmWare Cloud", "vmware", False,
         "fakeuser", "fakepassword")
     ts6 = TerminalServer("http://8.9.10.11", "Canonicloud", "vmware", True)
@@ -216,7 +216,7 @@ emailaddrs = {"b" : big,  #lots of domains/servers
               "c" : citrix,
               "d" : defaults,  #for easy testing of default ts
               "e" : error,
-              "f" : freerdp,
+              "f" : freerdp2,
               "x" : x2go,
               "g" : garbage,
               "m" : missing_fields,  #json missing some fields

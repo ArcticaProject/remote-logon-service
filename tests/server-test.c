@@ -124,7 +124,7 @@ struct _type_data_t {
 
 type_data_t type_data[3] = {
 	{0, "ica", CONFIG_SERVER_TYPE_ICA},
-	{0, "freerdp", CONFIG_SERVER_TYPE_RDP},
+	{0, "freerdp2", CONFIG_SERVER_TYPE_RDP},
 	{0, "uccs", CONFIG_SERVER_TYPE_UCCS}
 };
 
