@@ -42,7 +42,7 @@ enum {
 
 G_DEFINE_TYPE (Server, server, G_TYPE_OBJECT);
 
-:wqtatic guint signals[LAST_SIGNAL] = { 0 };
+static guint signals[LAST_SIGNAL] = { 0 };
 
 static void
 server_class_init (ServerClass *klass)
