@@ -2,7 +2,7 @@
 <node name="/">
 	<interface name="org.ArcticaProject.RemoteLogon">
 		<!-- SERVER LIST DOCS - it's in a few places :-)
-			s: server type: "ica", "rdp", "x2go", "uccs"
+			s: server type: "ica", "freerdp2", "x2go", "uccs"
 			s: server name
 			s: server uri
 			b: last used server
@@ -11,7 +11,7 @@
 				b: required
 				v: default value
 				a{sv}: properties for the value
-					for value 'domain': a list of possible domains (ica, rdp)
+					for value 'domain': a list of possible domains (ica, freerdp2)
 					"domains": a(s)
 					for value 'domain': a list of domains that are read only
 					"read-only": b

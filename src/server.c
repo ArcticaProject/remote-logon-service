@@ -187,7 +187,7 @@ server_get_variant (Server * server)
 		if (IS_CITRIX_SERVER(server)) {
 			g_variant_builder_add_value(&tuple, g_variant_new_string("ica"));
 		} else if (IS_RDP_SERVER(server)) {
-			g_variant_builder_add_value(&tuple, g_variant_new_string("rdp"));
+			g_variant_builder_add_value(&tuple, g_variant_new_string("freerdp2"));
 		} else if (IS_UCCS_SERVER(server)) {
 			g_variant_builder_add_value(&tuple, g_variant_new_string("uccs"));
 		} else if (IS_X2GO_SERVER(server)) {
