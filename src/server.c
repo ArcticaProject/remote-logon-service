@@ -162,7 +162,7 @@ server_new_from_json (JsonObject * object)
 	if (g_strcmp0(proto, "ICA") == 0 || g_strcmp0(proto, "ica") == 0) {
 		newserver = citrix_server_new_from_json(object);
 	}
-	else if (g_strcmp0(proto, "freerdp") == 0 || g_strcmp0(proto, "rdp") == 0 || g_strcmp0(proto, "freerdp2") == 0 || g_strcmp0(proto, "RDP") == 0 || g_strcmp0(proto, "FreeRDP") == 0) || g_strcmp0(proto, "FreeRDP2") == 0 {
+	else if (g_strcmp0(proto, "freerdp") == 0 || g_strcmp0(proto, "rdp") == 0 || g_strcmp0(proto, "freerdp2") == 0 || g_strcmp0(proto, "RDP") == 0 || g_strcmp0(proto, "FreeRDP") == 0 || g_strcmp0(proto, "FreeRDP2") == 0) {
 		newserver = rdp_server_new_from_json(object);
 	}
 	else if (g_strcmp0(proto, "x2go") == 0 || g_strcmp0(proto, "X2go") == 0 || g_strcmp0(proto, "X2Go") == 0 || g_strcmp0(proto, "X2GO") == 0 || g_strcmp0(proto, "x2GO") == 0 || g_strcmp0(proto, "x2gO") == 0) {
