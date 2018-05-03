@@ -736,6 +736,7 @@ uccs_server_unlock (UccsServer * server, const gchar * address, const gchar * us
 		argv[2] = NULL;
 
 		g_setenv("SERVER_ROOT", server->parent.uri, TRUE);
+		g_setenv("API_VERSION", UCCS_API_VERSION, TRUE);
 
 		g_spawn_async_with_pipes(NULL, /* pwd */
 		                         (gchar **)argv,

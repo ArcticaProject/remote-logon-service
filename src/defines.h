@@ -21,6 +21,9 @@
 #ifndef __DEFINES_H__
 #define __DEFINES_H__
 
+/* required UCCS API version */
+#define UCCS_API_VERSION 5
+
 #define CONFIG_MAIN_GROUP "Remote Logon Service"
 #define CONFIG_MAIN_SERVERS   "Servers"
 #define CONFIG_SERVER_PREFIX  "Server"
