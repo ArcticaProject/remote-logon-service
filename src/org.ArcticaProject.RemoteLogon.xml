@@ -7,7 +7,7 @@
 			s: server uri
 			b: last used server
 			a(sbva{sv}): properties for the server
-				s: type: "username", "password", "domain", "email", "sessiontype"
+				s: type: "username", "password", "domain", "email", "command"
 				b: required
 				v: default value
 				a{sv}: properties for the value
@@ -15,7 +15,7 @@
 					"domains": a(s)
 					for value 'domain': a list of domains that are read only
 					"read-only": b
-					for value 'sessiontype': TODO -> a subset of session profile parameters...
+					for value 'command': TODO -> a subset of session profile parameters...
 					"nothing-yet": s
 			a(si): applications pinned for the server
 				s: ID of the application (desktop file)

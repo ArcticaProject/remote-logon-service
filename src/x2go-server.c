@@ -60,8 +60,8 @@ x2go_server_init (X2GoServer *self)
 {
        self->username = NULL;
        self->password = NULL;
-       self->sessiontype = NULL;
-       self->sessiontype_required = FALSE;
+       self->command = NULL;
+       self->command_required = FALSE;
 
        return;
 }
@@ -91,7 +91,7 @@ x2go_server_finalize (GObject *object)
 
        g_clear_pointer(&server->username, g_free);
        g_clear_pointer(&server->password, password_clear);
-       g_clear_pointer(&server->sessiontype, g_free);
+       g_clear_pointer(&server->command, g_free);
 
        G_OBJECT_CLASS (x2go_server_parent_class)->finalize (object);
        return;
@@ -129,17 +129,17 @@ get_properties (Server * server)
        g_variant_builder_add_value(&passbuilder, g_variant_parse(G_VARIANT_TYPE_VARDICT, "{}", NULL, NULL, NULL));
        g_variant_builder_add_value(&propbuilder, g_variant_builder_end(&passbuilder));
 
-       GVariantBuilder sessiontypebuilder;
-       g_variant_builder_init(&sessiontypebuilder, G_VARIANT_TYPE_TUPLE);
-       g_variant_builder_add_value(&sessiontypebuilder, g_variant_new_string("x2gosession"));
-       g_variant_builder_add_value(&sessiontypebuilder, g_variant_new_boolean(rserver->sessiontype_required));
-       if (rserver->sessiontype == NULL) {
-               g_variant_builder_add_value(&sessiontypebuilder, g_variant_new_variant(g_variant_new_string("")));
+       GVariantBuilder commandbuilder;
+       g_variant_builder_init(&commandbuilder, G_VARIANT_TYPE_TUPLE);
+       g_variant_builder_add_value(&commandbuilder, g_variant_new_string("command"));
+       g_variant_builder_add_value(&commandbuilder, g_variant_new_boolean(rserver->command_required));
+       if (rserver->command == NULL) {
+               g_variant_builder_add_value(&commandbuilder, g_variant_new_variant(g_variant_new_string("")));
        } else {
-               g_variant_builder_add_value(&sessiontypebuilder, g_variant_new_variant(g_variant_new_string(rserver->sessiontype)));
+               g_variant_builder_add_value(&commandbuilder, g_variant_new_variant(g_variant_new_string(rserver->command)));
        }
-       g_variant_builder_add_value(&sessiontypebuilder, g_variant_parse(G_VARIANT_TYPE_VARDICT, "{}", NULL, NULL, NULL));
-       g_variant_builder_add_value(&propbuilder, g_variant_builder_end(&sessiontypebuilder));
+       g_variant_builder_add_value(&commandbuilder, g_variant_parse(G_VARIANT_TYPE_VARDICT, "{}", NULL, NULL, NULL));
+       g_variant_builder_add_value(&propbuilder, g_variant_builder_end(&commandbuilder));
 
        return g_variant_builder_end(&propbuilder);
 }
@@ -209,18 +209,18 @@ x2go_server_new_from_json (JsonObject * object)
                }
        }
 
-       if (json_object_has_member(object, JSON_SESSIONTYPE)) {
-               JsonNode * node = json_object_get_member(object, JSON_SESSIONTYPE);
+       if (json_object_has_member(object, JSON_COMMNAD)) {
+               JsonNode * node = json_object_get_member(object, JSON_COMMNAD);
                if (JSON_NODE_TYPE(node) == JSON_NODE_VALUE && json_node_get_value_type(node) == G_TYPE_STRING) {
-                       const gchar * sessiontype = json_node_get_string(node);
-                       server->sessiontype = g_strdup(sessiontype);
+                       const gchar * command = json_node_get_string(node);
+                       server->command = g_strdup(command);
                }
        }
 
-       if (json_object_has_member(object, JSON_SESSIONTYPE_REQ)) {
-               JsonNode * node = json_object_get_member(object, JSON_SESSIONTYPE_REQ);
+       if (json_object_has_member(object, JSON_COMMNAD_REQ)) {
+               JsonNode * node = json_object_get_member(object, JSON_COMMNAD_REQ);
                if (JSON_NODE_TYPE(node) == JSON_NODE_VALUE && json_node_get_value_type(node) == G_TYPE_BOOLEAN) {
-                       server->sessiontype_required = json_node_get_boolean(node);
+                       server->command_required = json_node_get_boolean(node);
                }
        }
 

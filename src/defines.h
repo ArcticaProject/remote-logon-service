@@ -44,9 +44,9 @@
 #define JSON_URI             "URL"
 #define JSON_USERNAME        "Username"
 #define JSON_PASSWORD        "Password"
-#define JSON_DOMAIN_REQ      "DomainRequired"
 #define JSON_DOMAIN          "WindowsDomain"
-#define JSON_SESSIONTYPE     "SessionType"
-#define JSON_SESSIONTYPE_REQ "SessionTypeRequired"
+#define JSON_DOMAIN_REQ      "DomainRequired"
+#define JSON_COMMNAD         "Command"
+#define JSON_COMMNAD_REQ     "CommandRequired"
 
 #endif /* __DEFINES_H__ */

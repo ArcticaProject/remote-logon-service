@@ -47,8 +47,8 @@ struct _X2GoServer {
 
        gchar * username;
        gchar * password;
-       gchar * sessiontype;
-       gboolean sessiontype_required;
+       gchar * command;
+       gboolean command_required;
 };
 
 GType x2go_server_get_type (void);
