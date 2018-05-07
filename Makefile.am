@@ -1,9 +1,11 @@
+NULL =
 
-SUBDIRS = \
-	src \
-	data \
-	po \
-	tests
+SUBDIRS =								\
+        src								\
+        data								\
+        po								\
+        tests								\
+        $(NULL)
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-localinstall
 
