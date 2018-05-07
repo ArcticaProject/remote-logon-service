@@ -1,6 +1,58 @@
-2018-04-16 11:51:00 +0200 Mike Gabriel (bb85ace)
+2018-05-07 16:41:11 +0200 Mike Gabriel (989fc50)
 
-	* release 1.0.2.0 (HEAD -> master, tag: 1.0.2.0)
+	* release 1.0.2.90 (HEAD -> master, tag: 1.0.2.90)
+
+2018-05-07 16:39:56 +0200 Mike Gabriel (5b58804)
+
+	* Makefile.am: Re-layout format.
+
+2018-05-04 12:47:05 +0200 Mike Gabriel (52ddefc)
+
+	* src/defines.h: g_setenv() expects a string as value. So defining
+          UCCS_API_VERSION as string.
+
+2018-05-03 12:00:09 +0200 Mike Gabriel (b971c38)
+
+	* Start working on and using API v5.
+
+2018-05-03 10:38:58 +0200 Mike Gabriel (3dd8f3e)
+
+	* proto change for X2Go Sessions: Rename "SessionType*" to
+          "Command*".
+
+2018-05-02 12:45:13 +0200 Mike Gabriel (850dc3c)
+
+	* tests/: Adapt unit tests to renaming from freerdp -> freerdp2.
+
+2018-05-02 12:37:02 +0200 Mike Gabriel (92ebddd)
+
+	* src/server.c: Vim-caused typo fix.
+
+2018-05-02 12:34:48 +0200 Mike Gabriel (ecaeede)
+
+	* src/server.c: Parenthesis fix.
+
+2018-05-02 12:29:54 +0200 Mike Gabriel (9797ff8)
+
+	* Re-thinking naming scheme. The server type provided on DBus must
+          match the LightDM remote session name.
+
+2018-05-02 12:27:50 +0200 Mike Gabriel (61e0e54)
+
+	* src/server.c: RDP sessions shall be reported as rdp type over DBus.
+
+2018-05-02 12:25:36 +0200 Mike Gabriel (ae0c5ac)
+
+	* src/org.ArcticaProject.RemoteLogon.xml: Let's use rdp as default
+          proto name for RDP sessions.
+
+2018-05-02 12:24:06 +0200 Mike Gabriel (b8783d0)
+
+	* src/server.c: Allow proto name freerdp2 for RDP sessions.
+
+2018-04-16 11:51:00 +0200 Mike Gabriel (ef7f267)
+
+	* release 1.0.2.0 (tag: 1.0.2.0)
 
 2018-04-16 11:47:55 +0200 Mike Gabriel (6e61c30)
 
