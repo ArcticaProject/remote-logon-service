@@ -8,29 +8,34 @@ msgstr ""
 "Project-Id-Version: remote-logon-service 1.0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-21 16:29+0200\n"
-"PO-Revision-Date: 2017-07-21 16:28+0200\n"
-"Last-Translator: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>\n"
-"Language-Team: French\n"
+"PO-Revision-Date: 2018-05-30 08:33+0000\n"
+"Last-Translator: Jacky Blois <jacky.blois@laposte.net>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/arctica-framework/"
+"remote-logon-service/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.0-dev\n"
 
 #: ../data/remote-logon-service.conf.in.h:1
 msgid "Remote Logon"
-msgstr ""
+msgstr "Connexion à distance"
 
 #: ../src/main.c:390
 msgid ""
 "Configuration file for the remote logon service.  Defaults to '/etc/remote-"
 "logon-service.conf'."
 msgstr ""
+"Fichier de configuration pour le service d'accés à distance. Défaut à '/etc/"
+"remote-logon-service.conf'."
 
 #: ../src/main.c:390
 msgid "key_file"
-msgstr ""
+msgstr "key_file"
 
 #: ../src/main.c:415
 msgid "- Determine the remote servers that can be logged into"
 msgstr ""
+"- Détermine les serveurs distants sur lequel il est possible de se connecter"
