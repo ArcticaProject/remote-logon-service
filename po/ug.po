@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: remote-logon-service 1.0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-21 16:29+0200\n"
-"PO-Revision-Date: 2018-06-07 00:58+0000\n"
-"Last-Translator: Nureli <nureliosman@gmail.com>\n"
+"PO-Revision-Date: 2018-06-08 01:43+0000\n"
+"Last-Translator: ۋولقان <nureliosman@gmail.com>\n"
 "Language-Team: Uyghur <https://hosted.weblate.org/projects/arctica-framework/"
 "remote-logon-service/ug/>\n"
 "Language: ug\n"
@@ -21,20 +21,20 @@ msgstr ""
 
 #: ../data/remote-logon-service.conf.in.h:1
 msgid "Remote Logon"
-msgstr "ئۇزاقتىن كىرىش"
+msgstr "يىراقتىن كىرىش"
 
 #: ../src/main.c:390
 msgid ""
 "Configuration file for the remote logon service.  Defaults to '/etc/remote-"
 "logon-service.conf'."
 msgstr ""
-"ئۇزاقتىن كىرىش مۇلازىمىتى ئۈچۈن خاسلىق ھۆججىتى.  سۈكۈت ھالەتتە 'etc/remote-"
+"يىراقتىن كىرىش مۇلازىمىتى ئۈچۈن خاسلىق ھۆججىتى.  سۈكۈت ھالەتتە 'etc/remote-"
 "logon-service.conf/' ."
 
 #: ../src/main.c:390
 msgid "key_file"
-msgstr "ئاچقۇچ ھۆججەت"
+msgstr "ئاچقۇچ_ھۆججەت"
 
 #: ../src/main.c:415
 msgid "- Determine the remote servers that can be logged into"
-msgstr "-كىرگىلى بولىدىغان ئۇزاقتىن تىزگىنلەش مۇلازىمەتلىرىنى قارار بېرىڭ"
+msgstr "-كىرگىلى بولىدىغان يىراقتىن كىرىش مۇلازىمەتلىرىگە قارار بېرىڭ"
