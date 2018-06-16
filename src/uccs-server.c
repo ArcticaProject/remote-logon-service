@@ -457,6 +457,7 @@ uccs_server_new_from_keyfile (GKeyFile * keyfile, const gchar * groupname)
 		server->verify_server = g_key_file_get_boolean(keyfile, groupname, CONFIG_UCCS_VERIFY, NULL);
 	}
 
+	nm_state_changed(server->nm_client, NULL, server);
 	uccs_notify_state_change(server);
 
 	return SERVER(server);
