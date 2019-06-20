@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: remote-logon-service 1.0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-21 16:29+0200\n"
-"PO-Revision-Date: 2018-01-24 12:16+0000\n"
-"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: Hebrew <https://hosted.weblate.org/projects/arctica-framework"
-"/remote-logon-service/he/>\n"
+"PO-Revision-Date: 2019-06-21 10:01+0000\n"
+"Last-Translator: Ido Dana <idodana01@gmail.com>\n"
+"Language-Team: Hebrew <https://hosted.weblate.org/projects/arctica-framework/"
+"remote-logon-service/he/>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.19-dev\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 3.7\n"
 
 #: ../data/remote-logon-service.conf.in.h:1
 msgid "Remote Logon"
@@ -33,7 +33,7 @@ msgstr ""
 
 #: ../src/main.c:390
 msgid "key_file"
-msgstr ""
+msgstr "מפתח_קובץ"
 
 #: ../src/main.c:415
 msgid "- Determine the remote servers that can be logged into"
