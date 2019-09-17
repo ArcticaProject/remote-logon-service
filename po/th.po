@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: remote-logon-service 1.0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-21 16:29+0200\n"
-"PO-Revision-Date: 2019-09-13 17:23+0000\n"
+"PO-Revision-Date: 2019-09-18 13:24+0000\n"
 "Last-Translator: Srichon Buntarigwong <seechonn@gmail.com>\n"
 "Language-Team: Thai <https://hosted.weblate.org/projects/arctica-framework/"
 "remote-logon-service/th/>\n"
@@ -38,5 +38,8 @@ msgid "key_file"
 msgstr "key_file"
 
 #: ../src/main.c:415
+#, fuzzy
 msgid "- Determine the remote servers that can be logged into"
 msgstr ""
+"For me to system now open application\n"
+"development sure to check out on Thai  bank account saving."
