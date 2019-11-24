@@ -8,29 +8,33 @@ msgstr ""
 "Project-Id-Version: remote-logon-service 1.0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-21 16:29+0200\n"
-"PO-Revision-Date: 2017-07-21 16:29+0200\n"
-"Last-Translator: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>\n"
-"Language-Team: Turkish\n"
+"PO-Revision-Date: 2019-11-25 14:04+0000\n"
+"Last-Translator: Ferit Etem <ferit.etem@gmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/"
+"arctica-framework/remote-logon-service/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10-dev\n"
 
 #: ../data/remote-logon-service.conf.in.h:1
 msgid "Remote Logon"
-msgstr ""
+msgstr "Uzaktan Oturum Aç"
 
 #: ../src/main.c:390
 msgid ""
 "Configuration file for the remote logon service.  Defaults to '/etc/remote-"
 "logon-service.conf'."
 msgstr ""
+"Uzak oturum açma servisi için yapılandırma dosyası..  Varsayılan '/etc/"
+"remote-logon-service.conf'."
 
 #: ../src/main.c:390
 msgid "key_file"
-msgstr ""
+msgstr "anahtar_dosya"
 
 #: ../src/main.c:415
 msgid "- Determine the remote servers that can be logged into"
-msgstr ""
+msgstr "- Oturum açılabilecek uzak sunucuları belirleme"
