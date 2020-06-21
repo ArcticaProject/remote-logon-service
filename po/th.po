@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: remote-logon-service 1.0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-21 16:29+0200\n"
-"PO-Revision-Date: 2019-09-18 13:24+0000\n"
-"Last-Translator: Srichon Buntarigwong <seechonn@gmail.com>\n"
+"PO-Revision-Date: 2020-06-22 17:41+0000\n"
+"Last-Translator: CHAIWIT PHONKHEN <5911110222@mutacth.com>\n"
 "Language-Team: Thai <https://hosted.weblate.org/projects/arctica-framework/"
 "remote-logon-service/th/>\n"
 "Language: th\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.9-dev\n"
+"X-Generator: Weblate 4.2-dev\n"
 
 #: ../data/remote-logon-service.conf.in.h:1
 #, fuzzy
@@ -29,7 +29,7 @@ msgid ""
 "Configuration file for the remote logon service.  Defaults to '/etc/remote-"
 "logon-service.conf'."
 msgstr ""
-"Configuration file for the remote logon service.  Defaults to '/etc/remote-"
+"ค่าเริ่มต้น ไฟล์ปรับแต่งสำหรับ เซอร์วิส เข้าสู่ระบบระยะไกล '/etc/remote-"
 "logon-service.conf'."
 
 #: ../src/main.c:390
