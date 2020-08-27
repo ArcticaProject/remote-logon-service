@@ -8,17 +8,20 @@ msgstr ""
 "Project-Id-Version: remote-logon-service 1.0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-21 16:29+0200\n"
-"PO-Revision-Date: 2017-07-21 16:28+0200\n"
-"Last-Translator: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>\n"
-"Language-Team: Occitan\n"
+"PO-Revision-Date: 2020-08-30 19:37+0000\n"
+"Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
+"Language-Team: Occitan <https://hosted.weblate.org/projects/"
+"arctica-framework/remote-logon-service/oc/>\n"
 "Language: oc\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.2.1-dev\n"
 
 #: ../data/remote-logon-service.conf.in.h:1
 msgid "Remote Logon"
-msgstr ""
+msgstr "Connexion a distància"
 
 #: ../src/main.c:390
 msgid ""
@@ -28,7 +31,7 @@ msgstr ""
 
 #: ../src/main.c:390
 msgid "key_file"
-msgstr ""
+msgstr "fichièr_clau"
 
 #: ../src/main.c:415
 msgid "- Determine the remote servers that can be logged into"
