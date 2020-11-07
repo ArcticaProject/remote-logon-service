@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: remote-logon-service 1.0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-21 16:29+0200\n"
-"PO-Revision-Date: 2020-08-30 19:37+0000\n"
+"PO-Revision-Date: 2020-11-08 21:26+0000\n"
 "Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/"
 "arctica-framework/remote-logon-service/oc/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.2.1-dev\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #: ../data/remote-logon-service.conf.in.h:1
 msgid "Remote Logon"
@@ -28,6 +28,8 @@ msgid ""
 "Configuration file for the remote logon service.  Defaults to '/etc/remote-"
 "logon-service.conf'."
 msgstr ""
+"Fichièr de configuracion pel servici d’accès distant. Per defaut « /etc/"
+"remote-logon-service.conf »."
 
 #: ../src/main.c:390
 msgid "key_file"
@@ -35,4 +37,4 @@ msgstr "fichièr_clau"
 
 #: ../src/main.c:415
 msgid "- Determine the remote servers that can be logged into"
-msgstr ""
+msgstr "- Determina los servidors distants ont es l’accès es possible"
