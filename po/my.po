@@ -8,27 +8,30 @@ msgstr ""
 "Project-Id-Version: remote-logon-service 1.0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-21 16:29+0200\n"
-"PO-Revision-Date: 2017-07-21 16:28+0200\n"
-"Last-Translator: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>\n"
-"Language-Team: Burmese\n"
+"PO-Revision-Date: 2021-04-20 07:29+0000\n"
+"Last-Translator: j.kemu <zartlike@mailinator.com>\n"
+"Language-Team: Burmese <https://hosted.weblate.org/projects/"
+"arctica-framework/remote-logon-service/my/>\n"
 "Language: my\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #: ../data/remote-logon-service.conf.in.h:1
 msgid "Remote Logon"
-msgstr ""
+msgstr "အဝေးမှဝင်ခြင်း"
 
 #: ../src/main.c:390
 msgid ""
 "Configuration file for the remote logon service.  Defaults to '/etc/remote-"
 "logon-service.conf'."
-msgstr ""
+msgstr "အဝေးမှဝင်ခြင်းပြုကျင့်ဖိုင်။ ပုံမှန် '/etc/remote-logon-service.conf'."
 
 #: ../src/main.c:390
 msgid "key_file"
-msgstr ""
+msgstr "သော့ဖိုင်"
 
 #: ../src/main.c:415
 msgid "- Determine the remote servers that can be logged into"
