@@ -21,6 +21,8 @@
 #ifndef __DEFINES_H__
 #define __DEFINES_H__
 
+#define RLS_UNUSED __attribute__((unused))
+
 /* required UCCS API version */
 #define UCCS_API_VERSION "5"
 
