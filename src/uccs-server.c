@@ -174,7 +174,7 @@ struct _hash_helper {
 
 /* GHashTable foreach item */
 static gboolean
-clear_hash_helper (gpointer key, gpointer value, gpointer user_data)
+clear_hash_helper (gpointer key, gpointer RLS_UNUSED value, gpointer user_data)
 {
 	struct _hash_helper * helper = (struct _hash_helper *)user_data;
 	GError * error = NULL;
@@ -303,7 +303,7 @@ uccs_server_finalize (GObject *object)
 
 /* Callback from the message getting complete */
 static void
-verify_server_cb (SoupSession * session, SoupMessage * message, gpointer user_data)
+verify_server_cb (SoupSession RLS_UNUSED *session, SoupMessage *message, gpointer user_data)
 {
 	UccsServer * server = UCCS_SERVER(user_data);
 	guint statuscode = 404;
@@ -341,7 +341,7 @@ verify_server (UccsServer * server)
 
 /* Callback for when the Network Manger state changes */
 static void
-nm_state_changed (NMClient *client, const GParamSpec *pspec, gpointer user_data)
+nm_state_changed (NMClient RLS_UNUSED *client, const GParamSpec RLS_UNUSED *pspec, gpointer user_data)
 {
 	g_return_if_fail(IS_UCCS_SERVER(user_data));
 	UccsServer * server = UCCS_SERVER(user_data);
@@ -368,7 +368,7 @@ nm_state_changed (NMClient *client, const GParamSpec *pspec, gpointer user_data)
 
 /* Get the properties that can be sent by the greeter for this server */
 static GVariant *
-get_properties (Server * server)
+get_properties (Server RLS_UNUSED *server)
 {
 	GVariantBuilder propbuilder;
 	g_variant_builder_init(&propbuilder, G_VARIANT_TYPE_ARRAY);
@@ -472,7 +472,7 @@ parse_rds_array (UccsServer * server, JsonArray * array)
 	g_list_free_full(server->subservers, g_object_unref);
 	server->subservers = NULL;
 
-	int i;
+	guint i;
 	for (i = 0; i < json_array_get_length(array); i++) {
 		JsonNode * node = json_array_get_element(array, i);
 

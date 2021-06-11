@@ -91,7 +91,7 @@ do_aes_encrypt(const gchar *origBuffer, const gchar * password, size_t *outBuffe
 	const size_t bufferLength = ceil((double)origBufferLength / blkLength) * blkLength;
 	gchar *buffer = malloc(bufferLength);
 	memcpy(buffer, origBuffer, origBufferLength);
-	int i;
+	size_t i;
 	for (i = origBufferLength; i < bufferLength; ++i)
 		buffer[i] = 0;
 

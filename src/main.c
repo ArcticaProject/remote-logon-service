@@ -63,7 +63,7 @@ error_domain (void)
 /* When one of the state changes on the server emit that so that everone knows there
    might be a new server available. */
 static void
-server_status_updated (Server * server, ServerState newstate, RemoteLogon * rl)
+server_status_updated (Server RLS_UNUSED *server, ServerState newstate, RemoteLogon *rl)
 {
 	GVariant * array = NULL;
 
@@ -88,7 +88,7 @@ server_status_updated (Server * server, ServerState newstate, RemoteLogon * rl)
 /* Looks for the config file and does some basic parsing to pull out the UCCS servers
    that are configured in it */
 static void
-find_config_file (GKeyFile * parsed, const gchar * cmnd_line, RemoteLogon * rl)
+find_config_file (GKeyFile *parsed, const gchar *cmnd_line, RemoteLogon *rl)
 {
 	GError * error = NULL;
 	const gchar * file = DEFAULT_CONFIG_FILE;
@@ -138,7 +138,7 @@ find_config_file (GKeyFile * parsed, const gchar * cmnd_line, RemoteLogon * rl)
 }
 
 gint
-server_list_to_array (GVariantBuilder * builder, GList * items)
+server_list_to_array (GVariantBuilder *builder, GList *items)
 {
 	gint servercnt = 0;
 	GList * head = NULL;
@@ -159,7 +159,7 @@ server_list_to_array (GVariantBuilder * builder, GList * items)
 }
 
 static gboolean
-handle_get_servers (RemoteLogon * rl, GDBusMethodInvocation * invocation, gpointer user_data)
+handle_get_servers (RemoteLogon RLS_UNUSED *rl, GDBusMethodInvocation * invocation, gpointer RLS_UNUSED user_data)
 {
 	GVariant * array = NULL;
 
@@ -207,7 +207,7 @@ handle_get_servers_login_cb (UccsServer * server, gboolean unlocked, gpointer us
 
 /* Handle the GetServerForLogin DBus call */
 static gboolean
-handle_get_servers_login (RemoteLogon * rl, GDBusMethodInvocation * invocation, gpointer user_data)
+handle_get_servers_login (RemoteLogon RLS_UNUSED *rl, GDBusMethodInvocation *invocation, gpointer RLS_UNUSED user_data)
 {
 	GVariant * params = g_dbus_method_invocation_get_parameters(invocation);
 	const gchar * sender = g_dbus_method_invocation_get_sender(invocation);
@@ -272,7 +272,7 @@ handle_get_servers_login (RemoteLogon * rl, GDBusMethodInvocation * invocation, 
 
 /* Look through a list of servers to see if one matches a URL */
 static Server *
-handle_get_domains_list_helper (GList * list, const gchar * uri)
+handle_get_domains_list_helper (GList *list, const gchar *uri)
 {
 	if (list == NULL) return NULL;
 
@@ -293,7 +293,7 @@ handle_get_domains_list_helper (GList * list, const gchar * uri)
 
 /* Get the cached domains for a server */
 static gboolean
-handle_get_domains (RemoteLogon * rl, GDBusMethodInvocation * invocation, gpointer user_data)
+handle_get_domains (RemoteLogon RLS_UNUSED *rl, GDBusMethodInvocation *invocation, gpointer RLS_UNUSED user_data)
 {
 	GVariant * params = g_dbus_method_invocation_get_parameters(invocation);
 
@@ -331,7 +331,7 @@ handle_get_domains (RemoteLogon * rl, GDBusMethodInvocation * invocation, gpoint
 
 /* Set a given server as last used */
 static gboolean
-handle_set_last_used_server (RemoteLogon * rl, GDBusMethodInvocation * invocation, gpointer user_data)
+handle_set_last_used_server (RemoteLogon RLS_UNUSED * rl, GDBusMethodInvocation * invocation, gpointer RLS_UNUSED user_data)
 {
 	GVariant * params = g_dbus_method_invocation_get_parameters(invocation);
 
@@ -376,7 +376,7 @@ handle_set_last_used_server (RemoteLogon * rl, GDBusMethodInvocation * invocatio
 
 /* If we loose the name, tell the world and there's not much we can do */
 static void
-name_lost (GDBusConnection * connection, const gchar * name, gpointer user_data)
+name_lost (GDBusConnection RLS_UNUSED * connection, const gchar * name, gpointer user_data)
 {
 	GMainLoop * mainloop = (GMainLoop *)user_data;
 
