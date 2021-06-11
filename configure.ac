@@ -98,7 +98,7 @@ AM_GLIB_GNU_GETTEXT
 # Flags
 ###########################
 
-AC_SUBST(AM_CFLAGS, "-Wall -Werror")
+AC_SUBST(AM_CFLAGS, "-Wall")
 AC_SUBST(AM_CPPFLAGS, $AM_CFLAGS)
 
 AC_OUTPUT

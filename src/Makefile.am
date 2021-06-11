@@ -22,6 +22,8 @@ libgenerated_la_SOURCES =							\
         remote-logon.h								\
         $(NULL)
 
+# no -Werror here...
+# The generation tools might lag behind the GNU C compiler's sensitivity
 libgenerated_la_CFLAGS =							\
         $(SERVICE_CFLAGS)							\
         $(NULL)
@@ -57,6 +59,7 @@ libservers_la_SOURCES =								\
 
 libservers_la_CFLAGS =								\
         -DUCCS_QUERY_TOOL="\"remote-logon-config-agent\""			\
+        -Werror									\
         $(SERVICE_CFLAGS)							\
         $(COVERAGE_CFLAGS)							\
         $(NULL)
@@ -71,6 +74,7 @@ libservers_la_LDFLAGS =								\
 
 remote_logon_service_CFLAGS =							\
         -DDEFAULT_CONFIG_FILE="\"$(sysconfdir)/remote-logon-service.conf\""	\
+        -Werror									\
         $(SERVICE_CFLAGS)							\
         $(COVERAGE_CFLAGS)							\
         $(NULL)
