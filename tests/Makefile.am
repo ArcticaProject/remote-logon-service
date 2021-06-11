@@ -33,6 +33,7 @@ server_test_SOURCES =									\
 server_test_CFLAGS =									\
         -I$(top_srcdir)/src								\
         -I$(top_builddir)/src								\
+        -Werror										\
         $(SERVICE_CFLAGS)								\
         $(NULL)
 
@@ -78,6 +79,7 @@ dbus_interface_CFLAGS =									\
         -DUCCS_CONFIG_FILE="\"$(abs_srcdir)/uccs-config.conf\""				\
         -DSLMOCK_CONFIG_FILE="\"$(abs_builddir)/slmock-config.conf\""			\
         -DNULL_CONFIG_FILE="\"$(abs_srcdir)/null-config.conf\""				\
+        -Werror										\
         $(SERVICE_CFLAGS)								\
         $(TEST_CFLAGS)									\
         $(NULL)
