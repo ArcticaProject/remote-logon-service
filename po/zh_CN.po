@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: remote-logon-service 1.0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-21 16:29+0200\n"
-"PO-Revision-Date: 2018-11-29 06:07+0000\n"
-"Last-Translator: Fu peng hao <fupenghao.re@gmail.com>\n"
+"PO-Revision-Date: 2022-01-25 05:54+0000\n"
+"Last-Translator: yzqzss <yzqzss@othing.xyz>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "arctica-framework/remote-logon-service/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.3-dev\n"
+"X-Generator: Weblate 4.11-dev\n"
 
 #: ../data/remote-logon-service.conf.in.h:1
 msgid "Remote Logon"
-msgstr "远程登陆"
+msgstr "远程登录"
 
 #: ../src/main.c:390
 msgid ""
 "Configuration file for the remote logon service.  Defaults to '/etc/remote-"
 "logon-service.conf'."
-msgstr "远程登陆服务的默认配置文件位于：'/etc/remote-logon-service.conf'."
+msgstr "远程登录服务的默认配置文件位于：'/etc/remote-logon-service.conf'."
 
 #: ../src/main.c:390
 msgid "key_file"
