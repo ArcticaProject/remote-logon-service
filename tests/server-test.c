@@ -107,7 +107,8 @@ test_uccs_exec (void)
 	g_assert(server != NULL);
 	g_assert(g_strcmp0(server->name, "My Server") == 0);
 	g_assert(g_strcmp0(server->uri, "http://my.domain.com") == 0);
-	g_assert(g_strcmp0(UCCS_SERVER(server)->exec, "/bin/ls") == 0);
+	g_assert(g_strcmp0(UCCS_SERVER(server)->exec, "/bin/ls") == 0 ||
+			 g_strcmp0(UCCS_SERVER(server)->exec, "/usr/bin/ls") == 0);
 
 	g_object_unref(server);
 	g_key_file_unref(keyfile);
